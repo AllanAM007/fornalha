@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Forja</title>
+<style>
+  :root {
+    --bg: #120b08;
+    --panel: #1f1410;
+    --text: #f5e6d8;
+    --muted: #a88f7c;
+    --accent: #ff7a1a;
+    --good: #7bd88f;
+    --bad: #ff5c5c;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  body { display: flex; flex-direction: column; align-items: center; overflow: hidden;
+    touch-action: manipulation; user-select: none; -webkit-user-select: none; }
+  header { width: 100%; max-width: 900px; padding: 12px 16px; display: flex;
+    justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+  h1 { margin: 0; font-size: 1.4rem; letter-spacing: .08em; }
+  h1 span { color: var(--accent); }
+  .stats { display: flex; flex-wrap: wrap; gap: 6px 16px; font-variant-numeric: tabular-nums; font-size: .95rem; }
+  .stats b { color: var(--accent); }
+  #wrap { position: relative; width: 100%; max-width: 900px; flex: 1; min-height: 0; padding: 0 16px 16px; }
+  canvas { width: 100%; height: 100%; display: block; border-radius: 14px; background: var(--panel);
+    cursor: pointer; }
+  .overlay { position: absolute; inset: 0 16px 16px; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center; gap: 14px;
+    background: rgba(18, 11, 8, .82); border-radius: 14px; padding: 24px; }
+  .overlay[hidden] { display: none; }
+  .overlay h2 { margin: 0; font-size: 2.2rem; }
+  .overlay p { margin: 0; max-width: 460px; line-height: 1.5; color: var(--muted); }
+  .overlay p strong { color: var(--text); }
+  button { font: inherit; font-weight: 700; font-size: 1.1rem; padding: 12px 28px; border: 0;
+    border-radius: 999px; background: var(--accent); color: #1a0d05; cursor: pointer; }
+  button:hover { filter: brightness(1.1); }
+  kbd { background: #33231b; border-radius: 4px; padding: 1px 6px; color: var(--text); }
+</style>
+</head>
+<body>
+<header>
+  <h1>🔥 <span>FORJA</span></h1>
+  <div class="stats">
+    <div>Pontos <b id="score">0</b></div>
+    <div>Combo <b id="combo">x1</b></div>
+    <div>Vidas <b id="lives">❤❤❤</b></div>
+    <div>Recorde <b id="best">0</b></div>
+  </div>
+</header>
+
+<div id="wrap">
+  <canvas id="c"></canvas>
+
+  <div class="overlay" id="start">
+    <h2>🔨 Forja</h2>
+    <p>O metal esquenta sozinho no fogo. Quando ele chegar na <strong>cor pedida</strong>
+      (a faixa marcada no termômetro), martele com <kbd>Espaço</kbd>, clique ou toque.</p>
+    <p>Martelar frio quebra o combo. Deixar passar do branco <strong>queima o metal</strong>
+      e custa uma vida. Cinco marteladas certas forjam uma peça, e a próxima fica mais difícil.</p>
+    <button id="startBtn">Acender a fornalha</button>
+  </div>
+
+  <div class="overlay" id="over" hidden>
+    <h2>A fornalha apagou</h2>
+    <p id="overText"></p>
+    <button id="againBtn">Forjar de novo</button>
+  </div>
+</div>
+
+<script>
+(() => {
+  // ---------- Setup ----------
+  const canvas = document.getElementById('c');
+  const ctx = canvas.getContext('2d');
+  const $ = id => document.getElementById(id);
+  const ui = { score: $('score'), combo: $('combo'), lives: $('lives'), best: $('best'),
+    start: $('start'), over: $('over'), overText: $('overText') };
+
+  let W = 0, H = 0, DPR = 1;
+  function resize() {
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    const r = canvas.getBoundingClientRect();
+    W = r.width; H = r.height;
+    canvas.width = Math.round(W * DPR);
+    canvas.height = Math.round(H * DPR);
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+  window.addEventListener('resize', resize);
+
+  const store = {
+    get() { try { return +localStorage.getItem('forja.best') || 0; } catch { return 0; } },
+    set(v) { try { localStorage.setItem('forja.best', String(v)); } catch {} }
+  };
+
+  // ---------- Metal colors ----------
+  const STOPS = [
+    [0,   [70, 66, 64],   'cinza'],
+    [20,  [110, 24, 14],  'vermelho-escuro'],
+    [40,  [200, 38, 24],  'vermelho'],
+    [60,  [255, 110, 10], 'laranja'],
+    [80,  [255, 200, 30], 'amarelo'],
+    [100, [255, 248, 220],'branco'],
+  ];
+  function heatColor(h) {
+    h = Math.max(0, Math.min(100, h));
+    for (let i = 0; i < STOPS.length - 1; i++) {
+      const [a, ca] = STOPS[i], [b, cb] = STOPS[i + 1];
+      if (h <= b) {
+        const t = (h - a) / (b - a);
+        return ca.map((v, k) => Math.round(v + (cb[k] - v) * t));
+      }
+    }
+    return STOPS[STOPS.length - 1][1];
+  }
+  const rgb = (c, a = 1) => `rgba(${c[0]},${c[1]},${c[2]},${a})`;
+  function colorName(h) {
+    let best = STOPS[0];
+    for (const s of STOPS) if (Math.abs(s[0] - h) < Math.abs(best[0] - h)) best = s;
+    return best[2];
+  }
+
+  // ---------- Items forged per level ----------
+  const ITEMS = [
+    ['🔩', 'Prego'], ['🗝️', 'Chave'], ['🔪', 'Faca'], ['🪝', 'Gancho'], ['⛏️', 'Picareta'],
+    ['🪓', 'Machado'], ['🛡️', 'Escudo'], ['⚔️', 'Espada'], ['🔱', 'Tridente'], ['👑', 'Coroa'],
+  ];
+  const itemFor = lvl => ITEMS[Math.min(lvl, ITEMS.length - 1)];
+  const HITS_PER_ITEM = 5;
+
+  // ---------- Audio ----------
+  let actx = null;
+  function audio() {
+    if (!actx) { try { actx = new (window.AudioContext || window.webkitAudioContext)(); } catch {} }
+    if (actx && actx.state === 'suspended') actx.resume();
+    return actx;
+  }
+  function clang(strength = 1) {
+    const a = audio(); if (!a) return;
+    const t = a.currentTime;
+    const out = a.createGain(); out.gain.value = 0.25 * strength; out.connect(a.destination);
+    for (const [f, d] of [[820, .6], [1340, .45], [2210, .3], [3150, .2]]) {
+      const o = a.createOscillator(), g = a.createGain();
+      o.type = 'sine'; o.frequency.value = f * (0.98 + Math.random() * .04);
+      g.gain.setValueAtTime(1, t); g.gain.exponentialRampToValueAtTime(0.001, t + d);
+      o.connect(g).connect(out); o.start(t); o.stop(t + d);
+    }
+    noise(0.06, 0.5 * strength, 3000);
+  }
+  function thud() {
+    const a = audio(); if (!a) return;
+    const t = a.currentTime, o = a.createOscillator(), g = a.createGain();
+    o.type = 'triangle'; o.frequency.setValueAtTime(180, t); o.frequency.exponentialRampToValueAtTime(60, t + .2);
+    g.gain.setValueAtTime(.35, t); g.gain.exponentialRampToValueAtTime(.001, t + .25);
+    o.connect(g).connect(a.destination); o.start(t); o.stop(t + .25);
+  }
+  function noise(dur, vol, freq) {
+    const a = audio(); if (!a) return;
+    const buf = a.createBuffer(1, Math.floor(a.sampleRate * dur), a.sampleRate);
+    const d = buf.getChannelData(0);
+    for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / d.length);
+    const src = a.createBufferSource(), f = a.createBiquadFilter(), g = a.createGain();
+    f.type = 'highpass'; f.frequency.value = freq; g.gain.value = vol;
+    src.buffer = buf; src.connect(f).connect(g).connect(a.destination); src.start();
+  }
+  const hiss = () => noise(0.7, 0.25, 1500);
+  function fanfare() {
+    const a = audio(); if (!a) return;
+    const t = a.currentTime;
+    [523, 659, 784, 1047].forEach((f, i) => {
+      const o = a.createOscillator(), g = a.createGain();
+      o.type = 'square'; o.frequency.value = f;
+      g.gain.setValueAtTime(0.0001, t + i * .09);
+      g.gain.exponentialRampToValueAtTime(.08, t + i * .09 + .02);
+      g.gain.exponentialRampToValueAtTime(.0001, t + i * .09 + .3);
+      o.connect(g).connect(a.destination); o.start(t + i * .09); o.stop(t + i * .09 + .32);
+    });
+  }
+
+  // ---------- Game state ----------
+  let s;
+  function newGame() {
+    s = {
+      running: true, score: 0, combo: 1, lives: 3, level: 0, hits: 0,
+      heat: 5, target: 0, width: 0, rate: 0,
+      hammer: 0,           // 0..1 animation (1 = just struck)
+      shake: 0, flash: 0,
+      particles: [], floaters: [],
+      forged: [],          // emojis of finished items
+      banner: null,        // {text, t}
+    };
+    newTarget();
+    updateUI();
+  }
+  function newTarget() {
+    // Zone narrows and heat rises faster as levels go up
+    s.width = Math.max(7, 22 - s.level * 1.6);
+    const half = s.width / 2;
+    s.target = 38 + Math.random() * (88 - 38 - half) ;
+    s.target = Math.max(30 + half, Math.min(92 - half, s.target));
+    s.rate = 16 + s.level * 3.2 + Math.random() * 4; // heat per second
+  }
+
+  function updateUI() {
+    ui.score.textContent = s.score;
+    ui.combo.textContent = 'x' + s.combo;
+    ui.lives.textContent = '❤'.repeat(s.lives) + '♡'.repeat(Math.max(0, 3 - s.lives));
+    ui.best.textContent = store.get();
+  }
+
+  // ---------- Input ----------
+  function strike() {
+    if (!s || !s.running) return;
+    if (s.hammer > 0.35) return; // hammer still in the air
+    s.hammer = 1;
+    const lo = s.target - s.width / 2, hi = s.target + s.width / 2;
+    const bar = barRect();
+
+    if (s.heat >= lo && s.heat <= hi) {
+      const acc = 1 - Math.abs(s.heat - s.target) / (s.width / 2); // 0..1
+      const perfect = acc > 0.75;
+      const pts = Math.round((50 + 100 * acc) * s.combo * (perfect ? 2 : 1));
+      s.score += pts;
+      s.combo = Math.min(s.combo + 1, 10);
+      s.hits++;
+      clang(perfect ? 1.2 : 0.9);
+      s.shake = perfect ? 10 : 6;
+      s.flash = perfect ? 0.5 : 0.25;
+      sparks(bar.x + bar.w / 2, bar.y, perfect ? 70 : 40, heatColor(s.heat));
+      floater(`${perfect ? 'PERFEITO! ' : ''}+${pts}`, perfect ? '#ffe066' : '#7bd88f');
+
+      if (s.hits >= HITS_PER_ITEM) {
+        const [emoji, name] = itemFor(s.level);
+        s.forged.push(emoji);
+        s.banner = { text: `${emoji} ${name} forjado!`, t: 1.8 };
+        s.score += 250 * (s.level + 1);
+        s.level++; s.hits = 0;
+        setTimeout(fanfare, 150);
+      }
+      s.heat = 8 + Math.random() * 8; // strike cools the metal: reheat for the next one
+      newTarget();
+    } else if (s.heat < lo) {
+      thud();
+      s.combo = 1;
+      s.shake = 3;
+      floater('Frio demais!', '#8fb3ff');
+      sparks(bar.x + bar.w / 2, bar.y, 6, [140, 140, 140]);
+      s.heat = Math.max(0, s.heat - 15);
+    } else {
+      // Past the zone but not burnt yet
+      clang(0.5);
+      s.combo = 1;
+      s.shake = 4;
+      floater('Quente demais!', '#ff9f5c');
+      sparks(bar.x + bar.w / 2, bar.y, 20, heatColor(s.heat));
+      s.heat = 10;
+      newTarget();
+    }
+    updateUI();
+  }
+
+  function burn() {
+    hiss();
+    s.lives--;
+    s.combo = 1;
+    s.shake = 14;
+    s.flash = 0.6;
+    const bar = barRect();
+    smoke(bar.x + bar.w / 2, bar.y);
+    floater('QUEIMOU! −1 ❤', '#ff5c5c');
+    s.heat = 5;
+    newTarget();
+    updateUI();
+    if (s.lives <= 0) gameOver();
+  }
+
+  function gameOver() {
+    s.running = false;
+    const best = store.get();
+    const record = s.score > best;
+    if (record) store.set(s.score);
+    const items = s.forged.length ? s.forged.join(' ') : 'nenhuma peça (ainda!)';
+    ui.overText.innerHTML = `Você fez <strong>${s.score}</strong> pontos` +
+      (record ? ' — <strong>novo recorde!</strong> 🏆' : ` (recorde: ${best})`) +
+      `<br>Peças forjadas: ${items}`;
+    setTimeout(() => { ui.over.hidden = false; $('againBtn').focus(); }, 700);
+    updateUI();
+  }
+
+  window.addEventListener('keydown', e => {
+    if (e.code === 'Space' || e.code === 'Enter') {
+      if (!ui.start.hidden || !ui.over.hidden) return; // let buttons handle it
+      e.preventDefault();
+      strike();
+    }
+  });
+  canvas.addEventListener('pointerdown', e => { e.preventDefault(); strike(); });
+
+  function begin() {
+    audio();
+    ui.start.hidden = true; ui.over.hidden = true;
+    newGame();
+    canvas.focus();
+  }
+  $('startBtn').addEventListener('click', begin);
+  $('againBtn').addEventListener('click', begin);
+
+  // ---------- Effects ----------
+  function sparks(x, y, n, col) {
+    for (let i = 0; i < n; i++) {
+      const a = -Math.PI / 2 + (Math.random() - .5) * Math.PI * 1.3;
+      const v = 150 + Math.random() * 420;
+      s.particles.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v,
+        life: .5 + Math.random() * .7, max: 1.2, size: 1.5 + Math.random() * 2.5,
+        col: Math.random() < .5 ? col : [255, 230, 150], kind: 'spark' });
+    }
+  }
+  function smoke(x, y) {
+    for (let i = 0; i < 26; i++) {
+      s.particles.push({ x: x + (Math.random() - .5) * 120, y, vx: (Math.random() - .5) * 40,
+        vy: -40 - Math.random() * 80, life: 1 + Math.random(), max: 2,
+        size: 10 + Math.random() * 18, col: [90, 90, 90], kind: 'smoke' });
+    }
+  }
+  function floater(text, color) {
+    const bar = barRect();
+    s.floaters.push({ text, color, x: bar.x + bar.w / 2, y: bar.y - 40, t: 1.1 });
+  }
+
+  // ---------- Layout ----------
+  function barRect() {
+    const aw = Math.min(W * 0.55, 420);
+    const ax = W * 0.42 - aw / 2, ay = H * 0.58;
+    return { x: ax + aw * 0.12, y: ay - 16, w: aw * 0.76, h: 16, anvil: { x: ax, y: ay, w: aw } };
+  }
+
+  // ---------- Loop ----------
+  let last = performance.now();
+  function loop(now) {
+    const dt = Math.min(0.05, (now - last) / 1000);
+    last = now;
+    if (s) update(dt);
+    draw(now / 1000);
+    requestAnimationFrame(loop);
+  }
+
+  function update(dt) {
+    if (s.running) {
+      // heating speeds up slightly the hotter it gets (ease-in)
+      s.heat += s.rate * dt * (0.75 + s.heat / 200);
+      if (s.heat >= 100) burn();
+    }
+    s.hammer = Math.max(0, s.hammer - dt * 4);
+    s.shake = Math.max(0, s.shake - dt * 40);
+    s.flash = Math.max(0, s.flash - dt * 2);
+    if (s.banner && (s.banner.t -= dt) <= 0) s.banner = null;
+
+    for (const p of s.particles) {
+      p.life -= dt;
+      p.x += p.vx * dt; p.y += p.vy * dt;
+      if (p.kind === 'spark') { p.vy += 900 * dt; p.vx *= 0.99; }
+      else { p.size += 20 * dt; p.vx *= 0.98; }
+    }
+    s.particles = s.particles.filter(p => p.life > 0);
+    for (const f of s.floaters) { f.t -= dt; f.y -= 50 * dt; }
+    s.floaters = s.floaters.filter(f => f.t > 0);
+  }
+
+  function roundRect(x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r); ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+  }
+
+  function draw(t) {
+    ctx.save();
+    ctx.clearRect(0, 0, W, H);
+    const heat = s ? s.heat : 30 + Math.sin(t) * 10;
+    const hc = heatColor(heat);
+
+    if (s && s.shake > 0) ctx.translate((Math.random() - .5) * s.shake, (Math.random() - .5) * s.shake);
+
+    // Background: forge glow from below
+    const bg = ctx.createRadialGradient(W * .42, H * 1.05, 20, W * .42, H * 1.05, Math.max(W, H) * .9);
+    const flick = 0.85 + Math.sin(t * 7) * .05 + Math.sin(t * 13) * .04;
+    bg.addColorStop(0, `rgba(255,110,20,${0.55 * flick})`);
+    bg.addColorStop(.35, 'rgba(120,35,10,.35)');
+    bg.addColorStop(1, 'rgba(20,12,9,1)');
+    ctx.fillStyle = bg; ctx.fillRect(-20, -20, W + 40, H + 40);
+
+    // Coals
+    for (let i = 0; i < 22; i++) {
+      const x = (i / 21) * W, y = H - 10 - Math.abs(Math.sin(i * 12.9)) * 18;
+      const g = 0.5 + 0.5 * Math.sin(t * 3 + i * 1.7);
+      ctx.fillStyle = `rgba(255,${80 + g * 80},20,${0.4 + g * 0.4})`;
+      ctx.beginPath(); ctx.arc(x, y, 10 + (i % 3) * 4, 0, Math.PI * 2); ctx.fill();
+    }
+
+    const bar = barRect();
+    const A = bar.anvil;
+
+    // Anvil
+    ctx.fillStyle = '#2d2a2a';
+    ctx.beginPath();
+    ctx.moveTo(A.x - A.w * .08, A.y);                   // horn tip
+    ctx.quadraticCurveTo(A.x + A.w * .05, A.y + 36, A.x + A.w * .2, A.y + 34);
+    ctx.lineTo(A.x + A.w * .3, A.y + 34);
+    ctx.lineTo(A.x + A.w * .36, A.y + 80);
+    ctx.lineTo(A.x + A.w * .24, A.y + 110);
+    ctx.lineTo(A.x + A.w * .80, A.y + 110);
+    ctx.lineTo(A.x + A.w * .68, A.y + 80);
+    ctx.lineTo(A.x + A.w * .74, A.y + 34);
+    ctx.lineTo(A.x + A.w, A.y + 34);
+    ctx.lineTo(A.x + A.w, A.y);
+    ctx.closePath(); ctx.fill();
+    ctx.fillStyle = '#4a4545'; ctx.fillRect(A.x, A.y, A.w, 5);
+
+    // Glowing metal bar
+    if (s) {
+      ctx.shadowColor = rgb(hc, Math.min(1, heat / 60));
+      ctx.shadowBlur = 10 + heat * 0.4;
+    }
+    ctx.fillStyle = rgb(hc);
+    roundRect(bar.x, bar.y, bar.w, bar.h, 6); ctx.fill();
+    ctx.shadowBlur = 0;
+    // flattening progress marks
+    if (s) {
+      ctx.fillStyle = 'rgba(0,0,0,.18)';
+      for (let i = 0; i < s.hits; i++) ctx.fillRect(bar.x + 16 + i * (bar.w - 32) / HITS_PER_ITEM, bar.y + 3, 4, bar.h - 6);
+    }
+
+    // Hammer
+    const hx = bar.x + bar.w / 2, pivotX = hx + 150, pivotY = bar.y - 20;
+    // resting = raised (0.9 rad); on strike it slams flat (0) and eases back up
+    ctx.save();
+    ctx.translate(pivotX, pivotY);
+    ctx.rotate(s && s.hammer > 0 ? 0.9 * (1 - s.hammer) : 0.9);
+    ctx.fillStyle = '#6b4a2f'; ctx.fillRect(-150, -5, 150, 10);          // handle
+    ctx.fillStyle = '#595959'; roundRect(-172, -24, 44, 48, 5); ctx.fill(); // head
+    ctx.fillStyle = '#7a7a7a'; ctx.fillRect(-172, -24, 44, 6);
+    ctx.restore();
+
+    // Thermometer
+    const tx = Math.min(W - 60, W * 0.86), ty = H * 0.1, th = H * 0.72, tw = 30;
+    const grad = ctx.createLinearGradient(0, ty + th, 0, ty);
+    for (const [h, c] of STOPS) grad.addColorStop(h / 100, rgb(c));
+    ctx.fillStyle = '#1a1210'; roundRect(tx - 4, ty - 4, tw + 8, th + 8, 10); ctx.fill();
+    ctx.globalAlpha = .35; ctx.fillStyle = grad; roundRect(tx, ty, tw, th, 7); ctx.fill(); ctx.globalAlpha = 1;
+    if (s) {
+      // target zone
+      const zTop = ty + th * (1 - (s.target + s.width / 2) / 100);
+      const zH = th * s.width / 100;
+      ctx.fillStyle = grad; ctx.fillRect(tx, zTop, tw, zH);
+      ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.setLineDash([5, 4]);
+      ctx.strokeRect(tx - 6, zTop, tw + 12, zH); ctx.setLineDash([]);
+      // danger line
+      ctx.fillStyle = 'rgba(255,60,60,.8)'; ctx.fillRect(tx - 6, ty, tw + 12, 3);
+      // current level marker
+      const my = ty + th * (1 - Math.min(heat, 100) / 100);
+      ctx.fillStyle = '#fff';
+      ctx.beginPath(); ctx.moveTo(tx - 8, my); ctx.lineTo(tx - 20, my - 8); ctx.lineTo(tx - 20, my + 8); ctx.fill();
+      ctx.fillRect(tx - 2, my - 1.5, tw + 4, 3);
+    }
+
+    // Instructions / target text
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#f5e6d8';
+    const fs = Math.max(16, Math.min(26, W / 30));
+    if (s && s.running) {
+      ctx.font = `600 ${fs}px system-ui, sans-serif`;
+      ctx.fillText(`Martele no ${colorName(s.target).toUpperCase()}`, W * 0.42, H * 0.14);
+      ctx.font = `${fs * .7}px system-ui, sans-serif`;
+      ctx.fillStyle = '#a88f7c';
+      const [emoji, name] = itemFor(s.level);
+      ctx.fillText(`Forjando: ${emoji} ${name}  ·  ${s.hits}/${HITS_PER_ITEM}`, W * 0.42, H * 0.14 + fs * 1.2);
+    }
+
+    // Forged items shelf
+    if (s && s.forged.length) {
+      ctx.textAlign = 'left';
+      ctx.font = `${fs}px system-ui, sans-serif`;
+      ctx.fillText(s.forged.join(' '), 14, H - 50);
+    }
+
+    // Particles
+    for (const p of s ? s.particles : []) {
+      const a = Math.max(0, p.life / p.max);
+      if (p.kind === 'spark') {
+        ctx.strokeStyle = rgb(p.col, a); ctx.lineWidth = p.size;
+        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p.x - p.vx * .025, p.y - p.vy * .025); ctx.stroke();
+      } else {
+        ctx.fillStyle = rgb(p.col, a * .35);
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+
+    // Floating texts
+    ctx.textAlign = 'center';
+    for (const f of s ? s.floaters : []) {
+      ctx.globalAlpha = Math.min(1, f.t * 2);
+      ctx.font = `800 ${fs * 1.1}px system-ui, sans-serif`;
+      ctx.fillStyle = f.color;
+      ctx.fillText(f.text, f.x, f.y);
+    }
+    ctx.globalAlpha = 1;
+
+    // Banner
+    if (s && s.banner) {
+      const a = Math.min(1, s.banner.t * 2);
+      ctx.globalAlpha = a;
+      ctx.fillStyle = 'rgba(0,0,0,.55)';
+      ctx.fillRect(0, H * .3 - fs * 1.4, W, fs * 2.4);
+      ctx.fillStyle = '#ffe066';
+      ctx.font = `800 ${fs * 1.4}px system-ui, sans-serif`;
+      ctx.fillText(s.banner.text, W / 2, H * .3 + fs * .3);
+      ctx.globalAlpha = 1;
+    }
+
+    ctx.restore();
+
+    // Flash
+    if (s && s.flash > 0) {
+      ctx.fillStyle = `rgba(255,240,200,${s.flash * .5})`;
+      ctx.fillRect(0, 0, W, H);
+    }
+  }
+
+  resize();
+  ui.best.textContent = store.get();
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
