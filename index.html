@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Fornalha Vila | Pizzaria e Restaurante</title>
+<meta content="Pizzas, burgers artesanais e bebidas. Faça seu pedido na Fornalha Vila de forma rápida e prática pelo WhatsApp." name="description">
+<meta content="Fornalha Vila | Pizzaria e Restaurante" property="og:title">
+<meta content="Pizzas assadas na fornalha, smash burgers gourmet e muito sabor entregues no conforto da sua casa. Peça pelo WhatsApp!" property="og:description">
+<meta content="website" property="og:type">
+<!-- Tailwind CSS CDN & Font Awesome Icons & Google Fonts -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              red: '#E5252A',
+              redHover: '#c81b20',
+              gold: '#D4AF37',
+              goldLight: '#F3C969',
+              dark: '#0e0e10',
+              darkCard: '#18181c',
+              darkMuted: '#24242b',
+              border: '#2e2e38'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['Epilogue', 'sans-serif'],
+            display: ['Epilogue', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      background-color: #0c0c0e;
+      color: #f3f3f5;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #FFF3D0 0%, #D4AF37 50%, #AA7C11 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .red-glow {
+      box-shadow: 0 4px 25px -4px rgba(229, 37, 42, 0.45);
+    }
+    .gold-glow {
+      box-shadow: 0 4px 20px -2px rgba(212, 175, 55, 0.35);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #121215;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #2a2a34;
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #E5252A;
+    }
+  </style>
+</head>
+<body class="bg-[#0c0c0e] text-zinc-100 min-h-screen flex flex-col selection:bg-brand-red selection:text-white">
+<!-- ==========================================
+       HEADER FIXO COM NAVEGAÇÃO E CARRINHO
+       ========================================== -->
+<header class="fixed top-0 left-0 right-0 z-40 bg-[#0e0e11]/95 backdrop-blur-md border-b border-brand-border/60 transition-all duration-300">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+<!-- LOGO FORNALHA VILA -->
+<a class="flex items-center gap-3 group focus:outline-none" href="#inicio">
+<div class="w-12 h-12 rounded-xl bg-brand-darkCard border border-brand-gold/40 flex items-center justify-center p-1 shadow-lg shadow-brand-red/20 group-hover:scale-105 transition-transform duration-300 overflow-hidden"><img alt="Logo Fornalha Vila" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfmihFvPi6z40dTuQohcl6cslJ40xthi--E-0dUCd-g0OaqjzH4SFQ1WNIcDoOvK_081r2gj6OtGBNAjaReOg5nmJPvTaXZoftnJJNXQwk3CeWCLWY8Q22goXlkO4IhRL4eUsZnqfr1hfhnh88RnMl-eKX6v4zWV_MsCBbE6JAyT_43HVMQgUH3xbM4-ZX-vTLsbnS9kYmpX_QyN5phd_nbqdJ7-jR5cjDZt_rregUzmahp8jIhzUkR6Oc2Pmjdjg2yw"></div>
+<div class="flex flex-col">
+<span class="font-serif font-black tracking-wider text-xl leading-tight text-white group-hover:text-amber-300 transition-colors">FORNALHA DA <span class="text-brand-red">VILA</span></span>
+<span class="text-[10px] tracking-[0.25em] uppercase text-zinc-400 font-semibold">
+            Pizzas &amp; Burgers
+          </span>
+</div>
+</a>
+<!-- MENU DESKTOP -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-semibold tracking-wide text-zinc-300 hover:text-brand-gold transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-gold hover:after:w-full after:transition-all" href="#inicio">Início</a>
+<a class="text-sm font-semibold tracking-wide text-zinc-300 hover:text-brand-gold transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-gold hover:after:w-full after:transition-all" href="#cardapio">Cardápio</a>
+<a class="text-sm font-semibold tracking-wide text-zinc-300 hover:text-brand-gold transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-gold hover:after:w-full after:transition-all" href="#sobre">Sobre</a>
+<a class="text-sm font-semibold tracking-wide text-zinc-300 hover:text-brand-gold transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-gold hover:after:w-full after:transition-all" href="#contacto">Contacto</a>
+</nav>
+<!-- AÇÕES: BOTAO PEDIR E CARRINHO -->
+<div class="flex items-center gap-3 sm:gap-4">
+<!-- BOTÃO DO CARRINHO COM BADGE -->
+<button class="relative p-2.5 rounded-xl bg-brand-darkCard hover:bg-brand-darkMuted border border-brand-border text-zinc-200 hover:text-white transition-all duration-200 hover:border-brand-gold/50 flex items-center justify-center" onclick="toggleCartDrawer(true)">
+<i class="fa-solid fa-basket-shopping text-lg"></i>
+<span class="absolute -top-1.5 -right-1.5 bg-brand-red text-white text-[11px] font-bold rounded-full w-5 h-5 flex items-center justify-center border-2 border-[#0e0e11] shadow-sm" id="cartBadgeCount">0</span>
+</button>
+<!-- CTA PEDIR AGORA -->
+<a class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-brand-red to-[#b91519] hover:from-[#f32d32] hover:to-brand-red text-white text-sm font-bold tracking-wide shadow-md shadow-brand-red/30 hover:shadow-brand-red/50 transition-all duration-300 active:scale-95" href="#cardapio">
+<i class="fa-solid fa-utensils text-xs"></i>
+<span>Pedir agora</span>
+</a>
+<!-- HAMBURGER BUTTON (MOBILE) -->
+<button class="md:hidden p-2.5 rounded-xl bg-brand-darkCard border border-brand-border text-zinc-300 hover:text-white focus:outline-none" id="mobileMenuBtn" onclick="toggleMobileMenu()">
+<i class="fa-solid fa-bars text-xl" id="mobileMenuIcon"></i>
+</button>
+</div>
+</div>
+<!-- MENU MOBILE DROPDOWN -->
+<div class="hidden md:hidden bg-[#121217] border-b border-brand-border px-6 py-6 transition-all duration-300 space-y-4 shadow-2xl" id="mobileMenu">
+<a class="block text-base font-medium text-zinc-200 hover:text-brand-gold" href="#inicio" onclick="toggleMobileMenu()">Início</a>
+<a class="block text-base font-medium text-zinc-200 hover:text-brand-gold" href="#cardapio" onclick="toggleMobileMenu()">Cardápio</a>
+<a class="block text-base font-medium text-zinc-200 hover:text-brand-gold" href="#sobre" onclick="toggleMobileMenu()">Sobre nós</a>
+<a class="block text-base font-medium text-zinc-200 hover:text-brand-gold" href="#contacto" onclick="toggleMobileMenu()">Contacto</a>
+<a class="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-brand-red text-white font-bold text-sm shadow-lg" href="#cardapio" onclick="toggleMobileMenu()">
+<i class="fa-solid fa-utensils"></i> Pedir Agora
+      </a>
+</div>
+</header>
+<!-- ==========================================
+       HERO SECTION
+       ========================================== -->
+<section class="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-black" id="inicio" style="background: radial-gradient(circle at 85% 20%, rgba(229, 37, 42, 0.22) 0%, rgba(229, 37, 42, 0.05) 35%, rgb(5, 5, 5) 70%, rgb(0, 0, 0) 100%), rgb(0, 0, 0);">
+<!-- Luzes de fundo atmosféricas -->
+<div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-red/15 rounded-full blur-[140px] pointer-events-none"></div>
+<div class="absolute top-1/3 right-10 w-[400px] h-[400px] bg-amber-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<!-- TEXTO DO HERO -->
+<div class="lg:col-span-7 text-center lg:text-left space-y-6">
+<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-darkCard border border-brand-gold/30 text-xs font-semibold text-brand-goldLight shadow-sm">
+<i class="fa-solid fa-fire-burner text-brand-red"></i>
+<span>Tradição Artesanal em Forno a Lenha</span>
+</div>
+<h1 class="text-4xl sm:text-5xl lg:text-6xl font-black font-serif tracking-tight leading-[1.1] text-white">Pizzas, burgers e muito sabor direto da nossa <span class="gold-gradient-text">fornalha da vila</span>.</h1>
+<p class="text-zinc-300 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 font-normal leading-relaxed">
+            Peça agora e receba seu pedido de forma rápida e prática. Ingredientes nobres, massa fermentada lentamente e o autêntico calor da brasa.
+          </p>
+<!-- BOTÕES DE AÇÃO HERO -->
+<div class="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+<a class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-brand-red hover:bg-brand-redHover text-white text-base font-bold shadow-xl shadow-brand-red/30 transition-all duration-300 hover:scale-[1.02] active:scale-95" href="#cardapio">
+<span>VER CARDÁPIO</span>
+<i class="fa-solid fa-arrow-down text-sm"></i>
+</a>
+<button class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-[#25D366]/15 hover:bg-[#25D366]/25 border border-[#25D366]/40 text-[#25D366] hover:text-white hover:border-[#25D366] text-base font-bold transition-all duration-300 hover:scale-[1.02] active:scale-95" onclick="directHeroWhatsapp()">
+<i class="fa-brands fa-whatsapp text-xl"></i>
+<span>PEDIR PELO WHATSAPP</span>
+</button>
+</div>
+<!-- PONTOS FORTES / BADGES -->
+<div class="pt-6 grid grid-cols-3 gap-3 border-t border-brand-border/60 max-w-md mx-auto lg:mx-0 text-left">
+<div>
+<p class="text-xs text-zinc-400">Tempo Médio</p>
+<p class="text-sm font-bold text-zinc-100 flex items-center gap-1.5 mt-0.5">
+<i class="fa-regular fa-clock text-brand-gold text-xs"></i> 30-45 min
+              </p>
+</div>
+<div>
+<p class="text-xs text-zinc-400">Entrega ou Takeaway</p>
+<p class="text-sm font-bold text-zinc-100 flex items-center gap-1.5 mt-0.5">
+<i class="fa-solid fa-motorcycle text-brand-red text-xs"></i> Rápido e Quente
+              </p>
+</div>
+<div>
+<p class="text-xs text-zinc-400">Avaliação</p>
+<p class="text-sm font-bold text-zinc-100 flex items-center gap-1.5 mt-0.5">
+<i class="fa-solid fa-star text-amber-400 text-xs"></i> 4.9 / 5.0
+              </p>
+</div>
+</div>
+</div>
+<!-- IMAGEM EM DESTAQUE GASTRONÔMICA -->
+<div class="lg:col-span-5 relative"><div class="relative mx-auto max-w-md lg:max-w-none flex items-center justify-center p-4 bg-black rounded-2xl"></div></div>
+</div>
+</div>
+</section>
+<!-- ==========================================
+       SEÇÃO DO CARDÁPIO & FILTROS
+       ========================================== -->
+<section class="py-20 bg-[#101013] relative border-t border-brand-border/40" id="cardapio">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<!-- CABEÇALHO DO CARDÁPIO -->
+<div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
+<h2 class="text-xs font-bold tracking-[0.2em] text-brand-gold uppercase">Nosso Cardápio Completo</h2>
+<p class="text-3xl sm:text-4xl font-serif font-black text-white">
+          Escolha, personalize e envie seu pedido
+        </p>
+<p class="text-zinc-400 text-sm sm:text-base">
+          Clique no produto para selecionar o tamanho desejado, borda recheada, adicionar observações e incluir no carrinho.
+        </p>
+</div>
+<!-- BOTÕES / FILTROS DE CATEGORIA (estado ativo aplicado por filterCategory no carregamento) -->
+<div class="flex items-center justify-center gap-2 sm:gap-3 flex-wrap mb-12" id="categoryFilters">
+<button class="cat-btn px-5 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 transition-all duration-200 hover:text-white border border-brand-border hover:border-brand-gold/40 bg-brand-darkCard text-zinc-300" id="btn-cat-pizzas" onclick="filterCategory('pizzas')">
+<span>🍕</span> Pizzas
+        </button>
+<button class="cat-btn px-5 py-2.5 rounded-xl text-sm font-semibold flex items-center gap-2 transition-all duration-200 hover:text-white border border-brand-border hover:border-brand-gold/40 bg-brand-darkCard text-zinc-300" id="btn-cat-burgers" onclick="filterCategory('burgers')">
+<span>🍔</span> Burgers
+        </button>
+<button class="cat-btn px-5 py-2.5 rounded-xl text-sm font-semibold flex items-center gap-2 transition-all duration-200 hover:text-white border border-brand-border hover:border-brand-gold/40 bg-brand-darkCard text-zinc-300" id="btn-cat-bebidas" onclick="filterCategory('bebidas')">
+<span>🥤</span> Bebidas
+        </button>
+<button class="cat-btn px-5 py-2.5 rounded-xl text-sm font-semibold flex items-center gap-2 transition-all duration-200 hover:text-white border border-brand-border hover:border-brand-gold/40 bg-brand-darkCard text-zinc-300" id="btn-cat-acompanhamentos" onclick="filterCategory('acompanhamentos')">
+<span>🍟</span> Acompanhamentos
+        </button>
+</div>
+<!-- GRID DINÂMICA DE PRODUTOS (RENDERIZADA VIA JAVASCRIPT A PARTIR DE PRODUCTS_DATA) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="productsGrid"></div>
+</div>
+</section>
+<!-- ==========================================
+       SEÇÃO SOBRE NÓS
+       ========================================== -->
+<section class="py-20 bg-[#0c0c0e] relative overflow-hidden border-t border-brand-border/40" id="sobre">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-6 relative"><div class="relative space-y-4"><div class="relative rounded-2xl overflow-hidden border border-brand-border/80 shadow-2xl group"><img alt="Chef pizzaiolo na fornalha a lenha artesanal" class="w-full h-64 md:h-72 object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0t5_uOWmlu3KwFIP3lPnQs7QHaM_9q1liuF9N-tXrnET73PrYZCVOtIxy3RJj1vdkA4B5g2lA4uFcHpHTgadJTy-BKOFbDixf9Khk_gug8METdKdH6lDFL0piKLbjY0aqZjigOYIIi_QIE619bx_jjLQLCXTbs1t1ElRqL_-p6oO7eyFI-gNiYnYfGErsbg5T5inYUAxlA5sgVKlld3PcbanbOzp_7alQvuo-Sy7rT9Zl8LaGgLMX"><div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div><span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-brand-red text-white text-[10px] font-extrabold uppercase tracking-wider shadow"><i class="fa-solid fa-fire text-amber-300 mr-1"></i>Forno a Lenha Vivo</span><div class="absolute bottom-4 left-4 right-4"><p class="font-serif text-lg font-bold text-white mb-0.5">Mestres da Fornalha</p><p class="text-zinc-300 text-xs">Arte tradicional italiana e forno aquecido com lenha selecionada.</p></div></div><div class="relative rounded-2xl overflow-hidden border border-brand-gold/40 shadow-2xl group"><img alt="Pizza artesanal saindo do forno a lenha" class="w-full h-52 md:h-60 object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDN-Bx3IXRU5IDm4nBz5nsUlsNg61bxX5yBGxcrAkivZplMEwFBPwasQarv8mf0caAyaPLqCdvHyDLr_pGbGg6PaYqvG7kc41Fehk0XY5brCIT45x436fEk6uI-yNvzRZXLKIo7XQH8QveSUutwkn6yHnDVdrqSCfv8vDtuxCjRNsAJN3uO3ULMScPooLLIqGYcnCPRS0caE3cG_V_eqJO9mZJWHqTwhV2VgX-hfnmuBk-vIUhqds0N"><div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div><div class="absolute bottom-4 left-4 right-4 flex items-center justify-between"><div><p class="font-serif text-lg font-bold text-white mb-0.5">A autêntica alma da fornalha</p><p class="text-zinc-300 text-xs">Borda aerada e crocante gratinada em brasa viva.</p></div><span class="hidden sm:inline-flex px-2.5 py-1 rounded-lg bg-black/75 border border-brand-gold/40 text-brand-goldLight text-[10px] font-bold backdrop-blur-sm">100% Artesanal</span></div></div></div></div>
+<div class="lg:col-span-6 space-y-6">
+<div class="inline-flex items-center gap-2 text-brand-gold text-xs font-bold tracking-widest uppercase">
+<i class="fa-solid fa-wheat-awn"></i> Nossa História &amp; Valores
+          </div>
+<h2 class="text-3xl sm:text-4xl font-serif font-black text-white leading-tight">
+            Paixão pelo fogo, respeito pela receita.
+          </h2>
+<!-- Texto Sobre Nós Facilmente Editável -->
+<div class="space-y-4 text-zinc-300 text-base leading-relaxed">
+<p id="editableAboutText">Na <strong>Fornalha da Vila</strong>, juntamos ingredientes selecionados, receitas cheias de sabor e o calor da nossa fornalha para proporcionar uma experiência especial em cada pedido.</p>
+<p>
+              Cada pizza é aberta manualmente com farinha de trigo de alta qualidade, recebe molho de tomates frescos cozido na casa e é gratinada em alta temperatura para obter aquela borda crocante e aerada que nossos clientes adoram.
+            </p>
+</div>
+<div class="grid grid-cols-2 gap-4 pt-2">
+<div class="p-4 rounded-xl bg-brand-darkCard border border-brand-border">
+<span class="block text-2xl font-black text-brand-red mb-1 font-serif">100%</span>
+<span class="text-xs font-semibold text-zinc-300">Ingredientes Selecionados</span>
+</div>
+<div class="p-4 rounded-xl bg-brand-darkCard border border-brand-border">
+<span class="block text-2xl font-black text-brand-gold mb-1 font-serif">Lenha Viva</span>
+<span class="text-xs font-semibold text-zinc-300">Crocância Inconfundível</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ==========================================
+       SEÇÃO CONTACTO & INFORMAÇÕES
+       ========================================== -->
+<section class="py-16 bg-[#111114] border-t border-brand-border/40" id="contacto">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="p-6 rounded-2xl bg-brand-darkCard border border-brand-border flex items-start gap-4">
+<div class="w-12 h-12 rounded-xl bg-brand-red/20 text-brand-red border border-brand-red/30 flex items-center justify-center shrink-0">
+<i class="fa-solid fa-location-dot text-xl"></i>
+</div>
+<div>
+<h3 class="text-base font-bold text-white mb-1">Localização</h3>
+<p class="text-sm text-zinc-400"><a class="underline hover:text-brand-gold transition-colors" href="https://www.google.com/maps/place//data=!4m2!3m1!1s0xd18d55049bab70f:0x9df45d9aa0d3ed11" target="_blank" rel="noopener">R. da Liberdade 7, 2590-026 Sobral de Monte Agraço</a></p>
+<span class="text-xs text-brand-gold font-semibold mt-2 inline-block">Disponível para Takeaway</span>
+</div>
+</div>
+<div class="p-6 rounded-2xl bg-brand-darkCard border border-brand-border flex items-start gap-4">
+<div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center shrink-0">
+<i class="fa-brands fa-whatsapp text-2xl"></i>
+</div>
+<div>
+<h3 class="text-base font-bold text-white mb-1">Pedidos WhatsApp</h3>
+<p class="text-sm text-zinc-400">Atendimento ágil para entrega rápida.</p>
+<p class="text-sm font-bold text-zinc-200 mt-1" id="displayWhatsappNumber">+351 912 345 678</p>
+</div>
+</div>
+<div class="p-6 rounded-2xl bg-brand-darkCard border border-brand-border flex items-start gap-4">
+<div class="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center shrink-0">
+<i class="fa-regular fa-clock text-xl"></i>
+</div>
+<div>
+<h3 class="text-base font-bold text-white mb-1">Horário de Funcionamento</h3>
+<p class="text-sm text-zinc-400">Terça a Sábado: 11:00 às 15:00 e 18:00 às 23:00<br><span class="text-xs text-zinc-500">Domingo e Segunda-feira: Fechado</span></p>
+<span class="text-xs text-emerald-400 font-semibold mt-1 inline-flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> Aberto para pedidos
+            </span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ==========================================
+       RODAPÉ
+       ========================================== -->
+<footer class="bg-[#09090b] border-t border-brand-border/60 py-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-2">
+<i class="fa-solid fa-fire text-brand-red"></i>
+<span class="font-serif font-black text-sm text-white">FORNALHA DA <span class="text-brand-red">VILA</span></span>
+<span class="text-xs text-zinc-500 ml-2">© 2025 Todos os direitos reservados.</span>
+</div>
+<p class="text-xs text-zinc-400">
+        Pizzaria artesanal e burgers gourmet prontos para envio no WhatsApp.
+      </p>
+</div>
+</footer>
+<!-- ==========================================
+       BOTÃO FLUTUANTE DO WHATSAPP (CANTO INFERIOR DIREITO)
+       ========================================== -->
+<a aria-label="Fazer pedido no WhatsApp" class="fixed bottom-6 right-6 z-40 bg-[#25D366] hover:bg-[#20ba59] text-white p-4 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-90 group focus:outline-none" href="javascript:void(0)" id="floatingWhatsappBtn" onclick="openDirectWhatsapp()">
+<i class="fa-brands fa-whatsapp text-3xl"></i>
+<!-- Tooltip flutuante discreto -->
+<span class="absolute right-16 bg-[#16161a] border border-brand-border text-zinc-100 text-xs font-semibold py-1.5 px-3 rounded-lg shadow-xl whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+      Fazer pedido no WhatsApp
+    </span>
+</a>
+<!-- ==========================================
+       MODAL DE DETALHE / CUSTOMIZAÇÃO DO PRODUTO
+       ========================================== -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm transition-opacity duration-300 hidden" id="productModal">
+<div class="relative w-full max-w-lg bg-[#151519] border border-brand-border rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+<!-- Botão Fechar -->
+<button class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-black/60 hover:bg-black/80 text-zinc-300 hover:text-white flex items-center justify-center transition-colors" onclick="closeProductModal()">
+<i class="fa-solid fa-xmark text-lg"></i>
+</button>
+<!-- Imagem do Modal -->
+<div class="relative h-52 w-full shrink-0 bg-zinc-900">
+<img alt="Produto Fornalha Vila" class="w-full h-full object-cover" id="modalProductImage" src="">
+<div class="absolute inset-0 bg-gradient-to-t from-[#151519] via-transparent to-transparent"></div>
+<span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-brand-red text-white text-xs font-bold uppercase tracking-wider shadow" id="modalProductCategory">PIZZAS</span>
+</div>
+<!-- Conteúdo do Modal (Scrollável se necessário) -->
+<div class="p-6 overflow-y-auto space-y-5 custom-scrollbar">
+<div>
+<h3 class="text-2xl font-serif font-black text-white mb-1" id="modalProductName"></h3>
+<p class="text-sm text-zinc-400" id="modalProductDesc"></p>
+</div>
+<!-- SELEÇÃO DE TAMANHO / VERSÃO -->
+<div class="space-y-2" id="modalSizesContainer">
+<label class="block text-xs font-bold uppercase tracking-wider text-brand-gold" id="modalSizesLabel">Escolha o Tamanho</label>
+<div class="grid grid-cols-2 gap-3" id="modalSizesOptions"></div>
+</div>
+<!-- SELEÇÃO DE BORDA RECHEADA (Apenas para Pizzas) -->
+<div class="space-y-2" id="modalCrustSection">
+<div class="flex items-center justify-between">
+<label class="block text-xs font-bold uppercase tracking-wider text-brand-gold">
+              Borda Recheada <span class="text-zinc-400 font-normal">(Opcional)</span>
+</label>
+<span class="text-[11px] font-bold text-brand-gold">+3.00€</span>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<button class="p-2.5 rounded-xl border text-center transition-all border-brand-gold bg-brand-gold/10 text-white font-bold text-xs flex flex-col items-center justify-center gap-1 shadow-sm" id="crust-opt-none" onclick="selectModalCrust('none')" type="button">
+<span>Sem Borda</span>
+<span class="text-[10px] text-zinc-400 font-normal">+0,00€</span>
+</button>
+<button class="p-2.5 rounded-xl border text-center transition-all border-brand-border bg-brand-darkCard text-zinc-400 hover:text-white font-semibold text-xs flex flex-col items-center justify-center gap-1" id="crust-opt-catupiry" onclick="selectModalCrust('catupiry')" type="button">
+<span>Catupiry</span>
+<span class="text-[10px] text-brand-gold">+3,00€</span>
+</button>
+<button class="p-2.5 rounded-xl border text-center transition-all border-brand-border bg-brand-darkCard text-zinc-400 hover:text-white font-semibold text-xs flex flex-col items-center justify-center gap-1" id="crust-opt-cheddar" onclick="selectModalCrust('cheddar')" type="button">
+<span>Cheddar</span>
+<span class="text-[10px] text-brand-gold">+3,00€</span>
+</button>
+</div>
+</div>
+<!-- QUANTIDADE -->
+<div class="flex items-center justify-between p-3.5 rounded-xl bg-brand-darkCard border border-brand-border">
+<span class="text-sm font-semibold text-zinc-300">Quantidade</span>
+<div class="flex items-center gap-3">
+<button class="w-8 h-8 rounded-lg bg-brand-darkMuted hover:bg-zinc-700 text-white font-bold flex items-center justify-center transition-colors" onclick="changeModalQty(-1)">
+<i class="fa-solid fa-minus text-xs"></i>
+</button>
+<span class="w-8 text-center font-bold text-base text-white" id="modalProductQty">1</span>
+<button class="w-8 h-8 rounded-lg bg-brand-darkMuted hover:bg-zinc-700 text-white font-bold flex items-center justify-center transition-colors" onclick="changeModalQty(1)">
+<i class="fa-solid fa-plus text-xs"></i>
+</button>
+</div>
+</div>
+<!-- OBSERVAÇÕES -->
+<div class="space-y-1.5">
+<label class="block text-xs font-bold uppercase tracking-wider text-zinc-400" for="modalProductNotes">
+            Observações
+          </label>
+<input class="w-full px-4 py-3 rounded-xl bg-brand-darkCard border border-brand-border text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-brand-gold transition-colors" id="modalProductNotes" placeholder="Ex: sem cebola, ponto da carne, caprichar no molho..." type="text">
+</div>
+</div>
+<!-- Footer do Modal com Preço e Ação -->
+<div class="p-5 border-t border-brand-border bg-[#121215] flex items-center justify-between gap-4 shrink-0">
+<div>
+<span class="text-xs text-zinc-400 block">Total do item</span>
+<span class="text-2xl font-black text-white font-serif" id="modalProductTotalPrice">€0.00</span>
+</div>
+<button class="flex-1 py-3.5 px-6 rounded-xl bg-brand-red hover:bg-brand-redHover text-white font-bold text-sm tracking-wide shadow-lg shadow-brand-red/30 transition-all flex items-center justify-center gap-2" onclick="confirmAddToCart()">
+<i class="fa-solid fa-cart-plus"></i>
+<span>ADICIONAR AO CARRINHO</span>
+</button>
+</div>
+</div>
+</div>
+<!-- ==========================================
+       DRAWER / SIDEBAR DO CARRINHO
+       ========================================== -->
+<div class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm transition-opacity duration-300 hidden" id="cartDrawerBackdrop" onclick="toggleCartDrawer(false)"></div>
+<div class="fixed top-0 right-0 bottom-0 w-full sm:w-[460px] z-50 bg-[#121216] border-l border-brand-border shadow-2xl flex flex-col transform transition-transform duration-300 ease-in-out translate-x-full" id="cartDrawer">
+<!-- Topo do Carrinho -->
+<div class="border-b border-brand-border flex items-center justify-between bg-[#15151a] p-3.5">
+<div class="flex items-center gap-2.5">
+<i class="fa-solid fa-basket-shopping text-brand-red text-lg"></i>
+<h3 class="text-lg font-bold font-serif text-white tracking-wide">Seu Pedido</h3>
+<span class="text-xs px-2 py-0.5 rounded-full bg-brand-darkMuted text-zinc-300 font-semibold" id="drawerItemsCount">0 itens</span>
+</div>
+<button class="w-9 h-9 rounded-xl bg-brand-darkMuted hover:bg-zinc-700 text-zinc-400 hover:text-white flex items-center justify-center transition-colors" onclick="toggleCartDrawer(false)">
+<i class="fa-solid fa-xmark text-lg"></i>
+</button>
+</div>
+<!-- Lista de Itens do Carrinho -->
+<div class="overflow-y-auto px-5 py-4 space-y-3 custom-scrollbar max-h-[38vh]" id="cartItemsList"></div>
+<!-- FORMULÁRIO DE DADOS DE ENTREGA / RETIRADA (Passo Final) -->
+<div class="flex-1 p-5 border-t border-brand-border bg-[#141418] space-y-3.5 overflow-y-auto custom-scrollbar">
+<!-- Escolha: Entrega ou Retirada -->
+<div>
+<label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-1.5">Método de Atendimento</label>
+<div class="grid grid-cols-2 gap-2">
+<button class="py-2 px-3 rounded-xl border text-xs font-bold flex items-center justify-center gap-2 transition-all bg-brand-red border-brand-red text-white" id="btnOptDelivery" onclick="setDeliveryType('entrega')" type="button">
+<i class="fa-solid fa-motorcycle"></i> Entrega (+€2.50)
+</button>
+<button class="py-2 px-3 rounded-xl border text-xs font-semibold flex items-center justify-center gap-2 transition-all bg-brand-darkCard border-brand-border text-zinc-400 hover:text-white" id="btnOptPickup" onclick="setDeliveryType('retirada')" type="button">
+<i class="fa-solid fa-store"></i> Levantamento (€0)
+</button>
+</div>
+</div>
+<!-- Dados do Cliente -->
+<div class="space-y-2 text-left">
+<div>
+<label class="block text-[11px] font-semibold text-zinc-400 uppercase">Seu Nome *</label>
+<input class="w-full mt-1 px-3.5 py-1.5 rounded-lg bg-brand-darkCard border border-brand-border text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-brand-gold" id="custName" placeholder="Ex: Allan Silva" type="text">
+</div>
+<div>
+<label class="block text-[11px] font-semibold text-zinc-400 uppercase">Telefone / Telemóvel *</label>
+<input class="w-full mt-1 px-3.5 py-1.5 rounded-lg bg-brand-darkCard border border-brand-border text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-brand-gold" id="custPhone" placeholder="Ex: 912 345 678" type="tel">
+</div>
+<!-- Campos de Entrega (Ocultados se for Levantamento no Restaurante) -->
+<div class="space-y-2" id="deliveryAddressSection">
+<div>
+<label class="block text-[11px] font-semibold text-zinc-400 uppercase">Morada Completa *</label>
+<input class="w-full mt-1 px-3.5 py-1.5 rounded-lg bg-brand-darkCard border border-brand-border text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-brand-gold" id="custAddress" placeholder="Rua, número, andar/apartamento" type="text">
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div>
+<label class="block text-[11px] font-semibold text-zinc-400 uppercase">Código Postal</label>
+<input class="w-full mt-1 px-3.5 py-1.5 rounded-lg bg-brand-darkCard border border-brand-border text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-brand-gold" id="custPostalCode" placeholder="Ex: 1000-001" type="text">
+</div>
+<div>
+<label class="block text-[11px] font-semibold text-zinc-400 uppercase">Localidade</label>
+<input class="w-full mt-1 px-3.5 py-1.5 rounded-lg bg-brand-darkCard border border-brand-border text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-brand-gold" id="custCity" placeholder="Ex: Lisboa" type="text">
+</div>
+</div>
+</div>
+<div>
+<label class="block text-[11px] font-semibold text-zinc-400 uppercase">Observações Gerais do Pedido</label>
+<input class="w-full mt-1 px-3.5 py-1.5 rounded-lg bg-brand-darkCard border border-brand-border text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-brand-gold" id="orderGeneralNotes" placeholder="Ex: Troco para €50, tocar campainha..." type="text">
+</div>
+</div>
+<!-- Resumo Financeiro -->
+<div class="pt-2.5 border-t border-brand-border space-y-1 text-sm">
+<div class="flex justify-between text-zinc-400 text-xs">
+<span>Subtotal:</span>
+<span class="font-semibold text-white" id="cartSubtotal">€0.00</span>
+</div>
+<div class="flex justify-between text-zinc-400 text-xs" id="deliveryFeeRow">
+<span>Taxa de entrega:</span>
+<span class="font-semibold text-white" id="cartDeliveryFee">€2.50</span>
+</div>
+<div class="flex justify-between text-sm font-extrabold text-white pt-1.5 border-t border-brand-border/60">
+<span>TOTAL:</span>
+<span class="text-lg font-serif text-brand-gold" id="cartFinalTotal">€0.00</span>
+</div>
+</div>
+<!-- BOTÃO FINALIZAR PEDIDO VIA WHATSAPP -->
+<button class="w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-600 to-green-500 hover:from-emerald-500 hover:to-green-400 text-white font-extrabold text-sm tracking-wide shadow-lg shadow-emerald-600/30 transition-all flex items-center justify-center gap-2" onclick="submitOrderToWhatsapp()">
+<i class="fa-brands fa-whatsapp text-lg"></i>
+<span>FINALIZAR PEDIDO NO WHATSAPP</span>
+</button>
+<p class="text-[11px] text-center text-zinc-500">
+        Não precisa criar conta. O WhatsApp abrirá pronto com seus itens!
+      </p>
+</div>
+</div>
+<!-- ==========================================
+       DADOS CENTRALIZADOS E LÓGICA JAVASCRIPT
+       ========================================== -->
+<script>
+    /* ============================================================
+       CONFIGURAÇÕES GLOBAIS DA FORNALHA VILA
+       ============================================================ */
+    const RESTAURANT_CONFIG = {
+      whatsappNumber: '351912345678', // Formato internacional
+      whatsappDisplay: '+351 912 345 678',
+      deliveryFee: 2.50, // Taxa de entrega padrão em Euros
+      currency: '€'
+    };
+
+    /* ============================================================
+       IMAGENS DOS PRODUTOS
+       ============================================================ */
+    const IMG = {
+      pizzaDefault: 'https://lh3.googleusercontent.com/aida/AEtjO1UYehEkIVDoRbI1Sr0meRV6CS-8LKb6CZRQX5xAk2BEojXsM-Rmy-KPpPkZqvm-wnaMoWzOt_bM73MPpS0ugoTwUtw7EvF_ohJjG0eEsxUx8u2pFA7S3XyxGpiEmBE2U6EuMJV_VuoU9C37gJD6OQ4xS2WrutyL4fweGGkSRpJbm9194BY3n1bCKMFb0WOrL4XYricZlzFQ5VRpW4IsbgioIxIEs6_Xmuz9XI5yDH4XSwuPe-Vwst79Dw',
+      pizzaCarijo: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAi98Qm_SG8Li44JZ75E016eJBp5cFcRDOJ2hAMTGnE_5hBBTBYN7br9-jisl4PpUtWl_c1KOsdeUnLc_GTHLzLfS7g4b60LQzzEp2lnNZte8SLqHLrfAvo0YBYB5NUa1Ji0wsKC3DNzbZ3CfnCI_zLpDSnPJu6uxZykXefghq8moAvi5zwmn4B6eWFMMY-fC_33fpkIeX1Ucywp9v-r5gKAUhdo6kw9AWsfd_w_ZyRQM9CwIywTem2oKxM_-7yrhFRvw',
+      pizzaFiambre: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCEg3El04abhJe_LYLj-Wl0zyTPFA8_XfxNdZyEr5z7_AQWoiZ7yIvW2tjB_HiYnPY0IZjoAHzqwQ9YbMb0L42cL0JJs6joq7mpYlS7BOA4y3AX5BJarZFU27QHRYEnhjcgnXjN5jYC1XOImCPhyTwl8QhIqkbrzj2TTJxJH1G0El0KZkFZeCPlCYmpVJLn8brIfAmPWIoSM_GxH7VyWG_v1UhXdl6VnBaDa-Q869br4mJkc1J5GqmUNt2AcVxL-U8AVw',
+      pizzaMozarela: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBAlNxxkDcLzvx_rL0ZJW_4NGArhYynFA9AvrYHevD3rjX4_qimvAkJxqykoo2T_QF2I4E8Rjb5am7mBBeFi3oGrmo2Z5XLkmF68JTdtpooHK_lQie-VRy6rZg9OUklGCgUKb5x1fKiQMrw0apD4K08wQDTB74wy53hXjv5htbvJJPeExCc3mXohdvKXJrGN_JSjewP7zJ54l9oncxktyBRFJ6DKyHJ1DIozW3GLcnEI1d8B8HVSTafgVVaSikKEjDw1w',
+      pizzaMarguerita: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDYodgKUxxyST-015hiO5Oln5CMRd2TXqAfxDlaeL_uDuqGToC6quja1eBhq89QZfY1_5z3HfL0I5rXg00YQT3Z0w9os9tJK9S6MSsd63I707Cs3q2qBI92S9zX83QpaCQGoa7DYx9JBejZJQ6WBUQWIF3C6HJAmlyayoZ8HIEJFEPhnWNSROZBElw_Ah0hdJANNgh5dxT-8OKGTsfWyF3PYwljcSgR15QCnGUKOO9mdUps26YkOUp5M9lvJz9AZ6f3HQ',
+      pizzaBrasileira: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD_VuQhKb4TMKEO-EH9dTFufUA6XeomegryrPsHdxoYP_2JyoD4MbR2JlRHXGsHVIZ6hAojuh0fDXCuznQDnp9nGi1raDKSvbcg1GK_O2s-QZ0q7smhXuxAJ1-YdrHfMNijUo5faNBf4y20_DUMsqqsd74tbBZW3rSUxu6P57EfM-g--HoGZpLPeuRSRuSPQ69UgHzmHNBmSaDRNdUv2ARetMjiDwspObDjuC6nQHdXHVCFw1TwDIwkmEgisuflrgDvww',
+      pizzaSiciliana: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAKvC7e_iWEAszjgoDN_GceEv_NO27vybYBsHUIJgT8m9Fs8LRwOK60oTC58Sm8NhDm0OpxLYiBiWH18dk5mA_bNYmPSs_gjvyY7VqGvr5M1IoDFMt21sp50D5jvHR5oKn-Hi2H3ywNxn1PGEQtSuAPzgpttzHkcSZDnrEtxUXzoYEAEbQgRUgdxJ5Y2rRlHsFTkwe4u_toWytXSIbEzpChBsDNLb0XSi9IV_bzxLAR0lr1YKSo6FnkZEi-Fh75Jn5uBg',
+      pizzaQuatroQueijos: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAk3II7eBvRjwRzl7epfoV3oBZCJDNdGvwQ49fe-7wzP6LGOOFIVpextzIlrFCvGsViMzW6G1RZa_uzCGrzZJDpP_mxHKW1GIxjgYmmPLn-XLfPO5iVIRyuXQboQ3LCj5UDJ_DbRVcE14tRpZbiCiINh3NjuAja1Xhn9uSbbghMR3jU9TyONjmoBTH4sEfNbDV4CejyB7nESqlGbUqi5p6xGbbBCjUlMX_MEMY7KccvCOFx1Lqz3Mo9nzZRwe3T0eaU7A',
+      pizzaFrangoCatupiry: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCYUpGF4K3cbFJIRnCvoqwbtED2Uuzt8ZOSePeaps2DAfaQH60CT2E5NLxNFVkhWQfNxjFSjpSa2dsSsjs6_HMbAWaCTmcXEspH4QXIPY8MQ2gDzpjx_cqD-ejnCJZo0dNxXzrBwx5JGelgiDD-ZTuU6AeMZBcCSvYjKDaNaNWplRek9oU689NY9vaqFID3pbWzkwPeOTUz4aBt3bBYeWCvZ1ZeMAjA7LdGIo5G-bSzmaRcpjykhAGh3baTvp4TzNF1Mg',
+      pizzaPortuguesa: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD2dFo6b_0GX_WhdTFYpN3gJen2irB6LOosGJUHJzvB6QLr_l5DvRV8HQZlhuTmo5tl5A0UYVuok0ieuUCQRn9nxKEGeq1OSNsRgYVznfYMkKi6yURn2xRZcDS3ax9aQf1IwzfgiSptz9RyuUKcJSH0FZj1_tYwIoZOdxa5SRNvepxnMWNEcjkWAwTqpto_QfXH4stahASQz2ec9BJGz_xrO6eGrpesUgzbJW-xv7xjvVUut7AA2rN0325if9Bc6mZz8A',
+      burger: 'https://lh3.googleusercontent.com/aida/AEtjO1XxMnTEVyHaL4OZFod0gtKVa3inheR_OS-gUDXonC4s6MyLyN8pOaCCcVIzxauUXZEGFDWF1WkK7Kb0Zh3of1tLRYssvWrD4cvVgVtzAKmBzUSQqcr-cM6sTgUOmp_Vb_mswe8-5lqJzv_WzGV-VhQxo41ebPm0qfYl7Gio_8o9WIxOmIG3yOCb-Da5IFg8Ycp_LPa4Qj5uyQfRQgwerLiEODrUqk4_1STcfb90u3OZWDaqH7XyXH_2SA',
+      drink: 'https://lh3.googleusercontent.com/aida/AEtjO1W1T_fHmIzIHrt0IILDQ6jg0RR76hubHlbQPbKE97CWGZItdTjAj7WmJRFHnT0T2cuZiqeYTyhb6ap06SIKS9ALFZEMoY5fSDouGOHIq-AVAJkcpJxUvTMZrqi49nuob-W1bVxrU5Xisv_PZ1t7fAkv5MrcXluLTQQyMIWK7QWPiMMVyWNli4NZk7us5uhaZA8vHhc88WpGGmKQC72naoiIy25RrBTZ5OfXH6UOjqph2Ps48zY_CRkV6w'
+    };
+
+    /* ============================================================
+       OPÇÕES DE BORDA RECHEADA (+3,00€)
+       ============================================================ */
+    const CRUST_OPTIONS = {
+      'none': { name: 'Sem borda recheada', price: 0.00, label: 'Sem Borda' },
+      'catupiry': { name: 'Borda de Catupiry', price: 3.00, label: 'Catupiry' },
+      'cheddar': { name: 'Borda de Cheddar', price: 3.00, label: 'Cheddar' }
+    };
+
+    /* ============================================================
+       ESTRUTURA CENTRALIZADA DE PRODUTOS
+       12 Sabores Oficiais de Pizza + 6 Hambúrgueres Oficiais, Bebidas e Acompanhamentos
+       ============================================================ */
+    const PRODUCTS_DATA = [
+      // --- 12 PIZZAS OFICIAIS ---
+      {
+        id: 'pizza-1-atum',
+        category: 'pizzas',
+        name: 'Pizza Atum',
+        description: 'Molho de tomate, atum, cebola, queijo mussarela e orégano.',
+        image: IMG.pizzaDefault,
+        badge: 'Tradicional',
+        sizes: [
+          { name: 'Média', price: 10.00 },
+          { name: 'Grande', price: 16.00 }
+        ]
+      },
+      {
+        id: 'pizza-2-bacon',
+        category: 'pizzas',
+        name: 'Pizza Bacon',
+        description: 'Molho de tomate, queijo mussarela, bacon e orégano.',
+        image: IMG.pizzaDefault,
+        badge: 'Crocante',
+        sizes: [
+          { name: 'Média', price: 10.50 },
+          { name: 'Grande', price: 15.50 }
+        ]
+      },
+      {
+        id: 'pizza-3-carijo',
+        category: 'pizzas',
+        name: 'Pizza Carijó',
+        description: 'Molho de tomate, frango, milho, bacon, queijo mussarela e orégano.',
+        image: IMG.pizzaCarijo,
+        badge: 'Sucesso',
+        sizes: [
+          { name: 'Média', price: 10.50 },
+          { name: 'Grande', price: 16.50 }
+        ]
+      },
+      {
+        id: 'pizza-4-fiambre',
+        category: 'pizzas',
+        name: 'Pizza Fiambre',
+        description: 'Molho de tomate, fiambre, queijo mussarela e orégano.',
+        image: IMG.pizzaFiambre,
+        sizes: [
+          { name: 'Média', price: 10.00 },
+          { name: 'Grande', price: 15.00 }
+        ]
+      },
+      {
+        id: 'pizza-5-pepperoni',
+        category: 'pizzas',
+        name: 'Pizza Pepperoni',
+        description: 'Molho de tomate, queijo mussarela, pepperoni e orégano.',
+        image: IMG.pizzaDefault,
+        badge: 'Mais Pedida',
+        sizes: [
+          { name: 'Média', price: 11.00 },
+          { name: 'Grande', price: 16.00 }
+        ]
+      },
+      {
+        id: 'pizza-6-mozarela',
+        category: 'pizzas',
+        name: 'Pizza Mozarela',
+        description: 'Molho de tomate, queijo mussarela, tomate e orégano.',
+        image: IMG.pizzaMozarela,
+        badge: 'Clássica',
+        sizes: [
+          { name: 'Média', price: 10.00 },
+          { name: 'Grande', price: 15.00 }
+        ]
+      },
+      {
+        id: 'pizza-7-marguerita',
+        category: 'pizzas',
+        name: 'Pizza Marguerita',
+        description: 'Molho de tomate, queijo mussarela, tomate, parmesão, alho frito e orégano.',
+        image: IMG.pizzaMarguerita,
+        badge: 'Especial da Vila',
+        sizes: [
+          { name: 'Média', price: 10.50 },
+          { name: 'Grande', price: 16.00 }
+        ]
+      },
+      {
+        id: 'pizza-8-brasileira',
+        category: 'pizzas',
+        name: 'Pizza Brasileira',
+        description: 'Molho de tomate, frango, bacon, cheddar e batata palha.',
+        image: IMG.pizzaBrasileira,
+        badge: 'Gourmet',
+        sizes: [
+          { name: 'Média', price: 11.50 },
+          { name: 'Grande', price: 17.50 }
+        ]
+      },
+      {
+        id: 'pizza-9-siciliana',
+        category: 'pizzas',
+        name: 'Pizza Siciliana',
+        description: 'Molho de tomate, bacon, champignon, queijo mussarela e azeitona.',
+        image: IMG.pizzaSiciliana,
+        sizes: [
+          { name: 'Média', price: 12.00 },
+          { name: 'Grande', price: 17.50 }
+        ]
+      },
+      {
+        id: 'pizza-10-quatro-queijos',
+        category: 'pizzas',
+        name: 'Pizza Quatro Queijos',
+        description: 'Molho de tomate, queijo mussarela, catupiry, gorgonzola e azeitona.',
+        image: IMG.pizzaQuatroQueijos,
+        badge: 'Favorita',
+        sizes: [
+          { name: 'Média', price: 11.50 },
+          { name: 'Grande', price: 16.50 }
+        ]
+      },
+      {
+        id: 'pizza-11-frango-catupiry',
+        category: 'pizzas',
+        name: 'Pizza Frango com Catupiry',
+        description: 'Molho de tomate, frango e catupiry.',
+        image: IMG.pizzaFrangoCatupiry,
+        badge: 'Irresistível',
+        sizes: [
+          { name: 'Média', price: 11.00 },
+          { name: 'Grande', price: 17.00 }
+        ]
+      },
+      {
+        id: 'pizza-12-portuguesa',
+        category: 'pizzas',
+        name: 'Pizza Portuguesa',
+        description: 'Molho de tomate, fiambre, ovo, ervilha, cebola, queijo mussarela.',
+        image: IMG.pizzaPortuguesa,
+        badge: 'Tradição',
+        sizes: [
+          { name: 'Média', price: 12.50 },
+          { name: 'Grande', price: 18.50 }
+        ]
+      },
+
+      // --- 6 HAMBÚRGUERES ARTESANAIS OFICIAIS ---
+      {
+        id: 'burger-1-classico',
+        category: 'burgers',
+        name: 'Burger Clássico',
+        description: 'Hambúrguer, cheddar e molho especial.',
+        image: IMG.burger,
+        badge: 'CLÁSSICO',
+        sizes: [
+          { name: 'Individual', price: 6.50 }
+        ]
+      },
+      {
+        id: 'burger-2-salada',
+        category: 'burgers',
+        name: 'Burger Salada',
+        description: 'Hambúrguer, cheddar, alface, tomate e molho especial.',
+        image: IMG.burger,
+        badge: 'FRESCO',
+        sizes: [
+          { name: 'Individual', price: 7.50 }
+        ]
+      },
+      {
+        id: 'burger-3-egg',
+        category: 'burgers',
+        name: 'Burger Egg',
+        description: 'Hambúrguer, cheddar, ovo, alface, tomate e molho especial.',
+        image: IMG.burger,
+        badge: 'SABOROSO',
+        sizes: [
+          { name: 'Individual', price: 8.50 }
+        ]
+      },
+      {
+        id: 'burger-4-bacon',
+        category: 'burgers',
+        name: 'Burger Bacon',
+        description: 'Hambúrguer, cheddar, bacon, alface, tomate e molho especial.',
+        image: IMG.burger,
+        badge: 'CROCANTE',
+        sizes: [
+          { name: 'Individual', price: 8.50 }
+        ]
+      },
+      {
+        id: 'burger-5-egg-bacon',
+        category: 'burgers',
+        name: 'Burger Egg Bacon',
+        description: 'Hambúrguer, cheddar, ovo, bacon, alface, tomate e molho especial.',
+        image: IMG.burger,
+        badge: 'MAIS PEDIDO',
+        sizes: [
+          { name: 'Individual', price: 9.50 }
+        ]
+      },
+      {
+        id: 'burger-6-fornalha',
+        category: 'burgers',
+        name: 'Burger Fornalha 🔥',
+        description: 'Especial da casa 2 hambúrgueres, cheddar, fiambre, ovo, bacon, milho, alface, tomate e molho especial.',
+        image: IMG.burger,
+        badge: 'ESPECIAL DA CASA',
+        isSpecial: true,
+        sizes: [
+          { name: 'Duplo Especial', price: 12.50 }
+        ]
+      },
+
+      // --- BEBIDAS ---
+      {
+        id: 'bebida-coca',
+        category: 'bebidas',
+        name: 'Coca-Cola Original 330ml',
+        description: 'Lata gelada de 330ml para acompanhar sua refeição.',
+        image: IMG.drink,
+        sizes: [
+          { name: '330ml', price: 1.80 }
+        ]
+      },
+      {
+        id: 'bebida-cerveja',
+        category: 'bebidas',
+        name: 'Cerveja Artesanal da Casa',
+        description: 'Cerveja gelada artesanal perfeita com pizzas e burgers.',
+        image: IMG.burger, // TODO: trocar por foto da cerveja
+        sizes: [
+          { name: 'Garrafa 330ml', price: 2.80 }
+        ]
+      },
+
+      // --- ACOMPANHAMENTOS ---
+      {
+        id: 'acomp-fritas-alecrim',
+        category: 'acompanhamentos',
+        name: 'Batata Rústica com Alecrim',
+        description: 'Batatas douradas estaladiças temperadas com sal marinho, alecrim fresco e molho aioli artesanal.',
+        image: IMG.drink, // TODO: trocar por foto da batata
+        badge: 'Crocante',
+        sizes: [
+          { name: 'Porção Média', price: 4.50 },
+          { name: 'Porção Grande', price: 6.50 }
+        ]
+      }
+    ];
+
+    /* ============================================================
+       ESTADO DA APLICAÇÃO (CARRINHO E MODAL)
+       ============================================================ */
+    let cart = [];
+    let currentCategory = 'pizzas';
+    let deliveryMethod = 'entrega'; // 'entrega' ou 'retirada'
+
+    // Estado temporário do modal de produto
+    let activeModalProduct = null;
+    let selectedSizeIndex = 0;
+    let selectedCrust = 'none'; // 'none', 'catupiry', 'cheddar'
+    let modalQuantity = 1;
+
+    /* ============================================================
+       RENDERIZAÇÃO DOS PRODUTOS
+       ============================================================ */
+    function renderProducts() {
+      const grid = document.getElementById('productsGrid');
+      grid.innerHTML = '';
+
+      const filtered = PRODUCTS_DATA.filter(p => p.category === currentCategory);
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="col-span-full text-center py-10 text-zinc-500">Nenhum produto cadastrado nesta categoria.</div>`;
+        return;
+      }
+
+      filtered.forEach(product => {
+        const startPrice = product.sizes[0].price.toFixed(2);
+        const hasMultipleSizes = product.sizes.length > 1;
+        const priceLabel = hasMultipleSizes ? `A partir de €${startPrice}` : `€${startPrice}`;
+
+        const isFornalhaSpecial = product.isSpecial;
+        const badgeClasses = isFornalhaSpecial
+          ? "bg-gradient-to-r from-brand-red via-amber-500 to-yellow-500 text-white shadow-lg shadow-brand-red/50 animate-pulse border border-yellow-300/40"
+          : "bg-brand-red text-white";
+
+        const card = document.createElement('div');
+        card.className = `bg-brand-darkCard rounded-2xl border ${isFornalhaSpecial ? 'border-brand-gold/80 shadow-brand-red/20 shadow-xl' : 'border-brand-border/80'} hover:border-brand-gold/50 overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col group`;
+
+        card.innerHTML = `
+          <div class="relative h-48 w-full overflow-hidden bg-zinc-900 cursor-pointer" onclick="openProductModal('${product.id}')">
+            <img src="${product.image}" alt="${product.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            ${product.badge ? `<span class="absolute top-3 left-3 px-2.5 py-1 rounded-full ${badgeClasses} text-[10px] font-extrabold uppercase tracking-wider shadow">${product.badge}</span>` : ''}
+            ${product.category === 'pizzas' ? `<span class="absolute bottom-3 right-3 px-2 py-0.5 rounded-md bg-black/75 border border-brand-gold/40 text-brand-goldLight text-[10px] font-semibold tracking-wide backdrop-blur-sm">+ Borda Opcional</span>` : ''}
+          </div>
+
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-start justify-between gap-2 mb-1.5">
+                <h3 class="font-serif font-bold text-lg text-white group-hover:text-amber-300 transition-colors">${product.name}</h3>
+              </div>
+              <p class="text-xs text-zinc-400 line-clamp-2 leading-relaxed mb-4">${product.description}</p>
+            </div>
+
+            <div class="pt-3 border-t border-brand-border/60 flex items-center justify-between">
+              <div>
+                <span class="text-[11px] text-zinc-400 block">${hasMultipleSizes ? 'Preço base' : 'Preço'}</span>
+                <span class="text-base font-extrabold font-serif text-brand-gold">${priceLabel}</span>
+              </div>
+              <button onclick="openProductModal('${product.id}')" class="px-3.5 py-2 rounded-xl bg-brand-darkMuted hover:bg-brand-red text-zinc-200 hover:text-white text-xs font-bold transition-all duration-200 border border-brand-border hover:border-brand-red shadow-sm flex items-center gap-1.5">
+                <i class="fa-solid fa-plus text-[10px]"></i>
+                <span>Adicionar</span>
+              </button>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function filterCategory(cat) {
+      currentCategory = cat;
+      document.querySelectorAll('.cat-btn').forEach(btn => {
+        btn.classList.remove('bg-brand-red', 'text-white', 'shadow-lg', 'shadow-brand-red/30');
+        btn.classList.add('bg-brand-darkCard', 'text-zinc-300', 'border', 'border-brand-border');
+      });
+      const activeBtn = document.getElementById(`btn-cat-${cat}`);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-brand-red', 'text-white', 'shadow-lg', 'shadow-brand-red/30');
+        activeBtn.classList.remove('bg-brand-darkCard', 'text-zinc-300');
+      }
+      renderProducts();
+    }
+
+    /* ============================================================
+       MODAL DE PRODUTO & CUSTOMIZAÇÃO (TAMANHO + BORDA + OBS)
+       ============================================================ */
+    function sizeOptionHtml(s, isSelected) {
+      return `
+        <div class="flex items-center gap-2">
+          <span class="w-4 h-4 rounded-full border flex items-center justify-center ${isSelected ? 'border-brand-gold bg-brand-gold' : 'border-zinc-500'}">
+            ${isSelected ? '<span class="w-1.5 h-1.5 rounded-full bg-black"></span>' : ''}
+          </span>
+          <span class="text-sm">${s.name}</span>
+        </div>
+        <span class="text-sm font-serif ${isSelected ? 'text-brand-gold' : 'text-zinc-300'}">€${s.price.toFixed(2)}</span>
+      `;
+    }
+
+    function sizeOptionClass(isSelected) {
+      return `p-3 rounded-xl border text-left flex items-center justify-between transition-all ${
+        isSelected
+          ? 'border-brand-gold bg-brand-gold/10 text-white font-bold'
+          : 'border-brand-border bg-brand-darkCard text-zinc-400 hover:text-white'
+      }`;
+    }
+
+    function openProductModal(productId) {
+      const product = PRODUCTS_DATA.find(p => p.id === productId);
+      if (!product) return;
+
+      activeModalProduct = product;
+      selectedSizeIndex = 0;
+      selectedCrust = 'none';
+      modalQuantity = 1;
+
+      document.getElementById('modalProductImage').src = product.image;
+      document.getElementById('modalProductCategory').innerText = product.category.toUpperCase();
+      document.getElementById('modalProductName').innerText = product.name;
+      document.getElementById('modalProductDesc').innerText = product.description;
+      document.getElementById('modalProductNotes').value = '';
+      document.getElementById('modalProductQty').innerText = modalQuantity;
+
+      // Renderiza as opções de tamanho ou versão
+      const sizesContainer = document.getElementById('modalSizesContainer');
+      const sizesOptions = document.getElementById('modalSizesOptions');
+      const sizesLabel = document.getElementById('modalSizesLabel');
+      sizesOptions.innerHTML = '';
+
+      sizesLabel.innerText = product.category === 'pizzas' ? 'Escolha o Tamanho' : 'Versão Selecionada';
+
+      if (product.sizes.length > 0) {
+        sizesContainer.classList.remove('hidden');
+        product.sizes.forEach((s, idx) => {
+          const isSelected = idx === 0;
+          const opt = document.createElement('button');
+          opt.type = 'button';
+          opt.className = sizeOptionClass(isSelected);
+          opt.id = `size-opt-${idx}`;
+          opt.onclick = () => selectModalSize(idx);
+          opt.innerHTML = sizeOptionHtml(s, isSelected);
+          sizesOptions.appendChild(opt);
+        });
+      } else {
+        sizesContainer.classList.add('hidden');
+      }
+
+      // Seção de borda recheada: visível APENAS para pizzas
+      const crustSection = document.getElementById('modalCrustSection');
+      if (product.category === 'pizzas') {
+        crustSection.classList.remove('hidden');
+        updateCrustButtonStyles();
+      } else {
+        crustSection.classList.add('hidden');
+      }
+
+      updateModalTotal();
+      document.getElementById('productModal').classList.remove('hidden');
+    }
+
+    function selectModalSize(index) {
+      selectedSizeIndex = index;
+      if (!activeModalProduct) return;
+
+      activeModalProduct.sizes.forEach((s, idx) => {
+        const btn = document.getElementById(`size-opt-${idx}`);
+        if (!btn) return;
+        const isSelected = idx === index;
+        btn.className = sizeOptionClass(isSelected);
+        btn.innerHTML = sizeOptionHtml(s, isSelected);
+      });
+
+      updateModalTotal();
+    }
+
+    function selectModalCrust(type) {
+      selectedCrust = type;
+      updateCrustButtonStyles();
+      updateModalTotal();
+    }
+
+    function updateCrustButtonStyles() {
+      ['none', 'catupiry', 'cheddar'].forEach(type => {
+        const btn = document.getElementById(`crust-opt-${type}`);
+        if (!btn) return;
+        if (selectedCrust === type) {
+          btn.className = 'p-2.5 rounded-xl border text-center transition-all border-brand-gold bg-brand-gold/10 text-white font-bold text-xs flex flex-col items-center justify-center gap-1 shadow-sm';
+        } else {
+          btn.className = 'p-2.5 rounded-xl border text-center transition-all border-brand-border bg-brand-darkCard text-zinc-400 hover:text-white font-semibold text-xs flex flex-col items-center justify-center gap-1';
+        }
+      });
+    }
+
+    function changeModalQty(delta) {
+      const newQty = modalQuantity + delta;
+      if (newQty >= 1 && newQty <= 20) {
+        modalQuantity = newQty;
+        document.getElementById('modalProductQty').innerText = modalQuantity;
+        updateModalTotal();
+      }
+    }
+
+    function updateModalTotal() {
+      if (!activeModalProduct) return;
+      const basePrice = activeModalProduct.sizes[selectedSizeIndex].price;
+      const crustExtra = (activeModalProduct.category === 'pizzas' && selectedCrust !== 'none') ? CRUST_OPTIONS[selectedCrust].price : 0;
+      const unitTotal = basePrice + crustExtra;
+      const total = unitTotal * modalQuantity;
+      document.getElementById('modalProductTotalPrice').innerText = `€${total.toFixed(2)}`;
+    }
+
+    function closeProductModal() {
+      document.getElementById('productModal').classList.add('hidden');
+      activeModalProduct = null;
+    }
+
+    function confirmAddToCart() {
+      if (!activeModalProduct) return;
+
+      const sizeObj = activeModalProduct.sizes[selectedSizeIndex];
+      const crustInfo = (activeModalProduct.category === 'pizzas') ? CRUST_OPTIONS[selectedCrust] : null;
+      const crustPrice = (crustInfo && selectedCrust !== 'none') ? crustInfo.price : 0;
+      const unitFinalPrice = sizeObj.price + crustPrice;
+      const notes = document.getElementById('modalProductNotes').value.trim();
+
+      const cartItem = {
+        cartItemId: Date.now() + Math.random().toString(36).substring(2, 6),
+        id: activeModalProduct.id,
+        category: activeModalProduct.category,
+        name: activeModalProduct.name,
+        sizeName: sizeObj.name,
+        basePrice: sizeObj.price,
+        crustKey: selectedCrust,
+        crustName: (crustInfo && selectedCrust !== 'none') ? crustInfo.name : null,
+        crustPrice: crustPrice,
+        price: unitFinalPrice,
+        quantity: modalQuantity,
+        notes: notes,
+        image: activeModalProduct.image
+      };
+
+      cart.push(cartItem);
+      closeProductModal();
+      renderCart();
+      toggleCartDrawer(true);
+    }
+
+    /* ============================================================
+       CARRINHO & GESTÃO DE ESTADO
+       ============================================================ */
+    function toggleCartDrawer(open) {
+      const drawer = document.getElementById('cartDrawer');
+      const backdrop = document.getElementById('cartDrawerBackdrop');
+      if (open) {
+        backdrop.classList.remove('hidden');
+        drawer.classList.remove('translate-x-full');
+      } else {
+        drawer.classList.add('translate-x-full');
+        backdrop.classList.add('hidden');
+      }
+    }
+
+    function removeCartItem(cartItemId) {
+      cart = cart.filter(item => item.cartItemId !== cartItemId);
+      renderCart();
+    }
+
+    function updateCartItemQty(cartItemId, delta) {
+      const item = cart.find(i => i.cartItemId === cartItemId);
+      if (item) {
+        item.quantity += delta;
+        if (item.quantity <= 0) {
+          removeCartItem(cartItemId);
+          return;
+        }
+        renderCart();
+      }
+    }
+
+    function setDeliveryType(type) {
+      deliveryMethod = type;
+      const btnDel = document.getElementById('btnOptDelivery');
+      const btnPic = document.getElementById('btnOptPickup');
+      const addressSection = document.getElementById('deliveryAddressSection');
+      const deliveryFeeRow = document.getElementById('deliveryFeeRow');
+
+      const activeCls = "py-2 px-3 rounded-xl border text-xs font-bold flex items-center justify-center gap-2 transition-all bg-brand-red border-brand-red text-white";
+      const inactiveCls = "py-2 px-3 rounded-xl border text-xs font-semibold flex items-center justify-center gap-2 transition-all bg-brand-darkCard border-brand-border text-zinc-400 hover:text-white";
+
+      if (type === 'entrega') {
+        btnDel.className = activeCls;
+        btnPic.className = inactiveCls;
+        addressSection.classList.remove('hidden');
+        deliveryFeeRow.classList.remove('hidden');
+      } else {
+        btnPic.className = activeCls;
+        btnDel.className = inactiveCls;
+        addressSection.classList.add('hidden');
+        deliveryFeeRow.classList.add('hidden');
+      }
+      renderCart();
+    }
+
+    function renderCart() {
+      const list = document.getElementById('cartItemsList');
+      const badgeCount = document.getElementById('cartBadgeCount');
+      const drawerCount = document.getElementById('drawerItemsCount');
+
+      const totalItems = cart.reduce((acc, i) => acc + i.quantity, 0);
+      badgeCount.innerText = totalItems;
+      drawerCount.innerText = `${totalItems} ${totalItems === 1 ? 'item' : 'itens'}`;
+
+      if (cart.length === 0) {
+        list.innerHTML = `
+          <div class="text-center py-6 text-zinc-500">
+            <i class="fa-solid fa-pizza-slice text-3xl mb-2 text-zinc-600 block"></i>
+            <p class="text-sm font-medium">Seu carrinho está vazio.</p>
+            <p class="text-xs text-zinc-600 mt-0.5">Adicione pizzas ou burgers para começar seu pedido!</p>
+          </div>
+        `;
+        document.getElementById('cartSubtotal').innerText = '€0.00';
+        document.getElementById('cartFinalTotal').innerText = '€0.00';
+        return;
+      }
+
+      list.innerHTML = '';
+      let subtotal = 0;
+
+      cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        subtotal += itemTotal;
+
+        const el = document.createElement('div');
+        el.className = "p-3.5 rounded-xl bg-brand-darkCard border border-brand-border/80 flex items-start gap-3 relative";
+
+        const crustLabel = item.crustName
+          ? `<span class="text-[11px] text-amber-300 font-semibold block mt-0.5"><i class="fa-solid fa-circle-dot text-[9px] text-brand-gold mr-1"></i>${item.crustName} (+€${item.crustPrice.toFixed(2)})</span>`
+          : '';
+
+        el.innerHTML = `
+          <div class="w-16 h-16 rounded-lg bg-zinc-900 overflow-hidden shrink-0">
+            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover">
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex justify-between items-start pr-6">
+              <h4 class="text-sm font-bold text-white truncate font-serif">${item.name}</h4>
+            </div>
+            <span class="text-xs text-brand-gold font-medium block">Opção: ${item.sizeName}</span>
+            ${crustLabel}
+            ${item.notes ? `<p class="text-[11px] text-zinc-400 italic mt-0.5 line-clamp-1">Obs: "${escapeHtml(item.notes)}"</p>` : ''}
+
+            <div class="mt-2 flex items-center justify-between">
+              <!-- Controle de Quantidade -->
+              <div class="flex items-center gap-2 bg-brand-darkMuted rounded-lg px-2 py-1">
+                <button onclick="updateCartItemQty('${item.cartItemId}', -1)" class="text-zinc-400 hover:text-white px-1 font-bold text-xs">-</button>
+                <span class="text-xs font-bold text-white px-1">${item.quantity}</span>
+                <button onclick="updateCartItemQty('${item.cartItemId}', 1)" class="text-zinc-400 hover:text-white px-1 font-bold text-xs">+</button>
+              </div>
+              <span class="text-sm font-bold text-white font-serif">€${itemTotal.toFixed(2)}</span>
+            </div>
+          </div>
+
+          <!-- Botão Excluir -->
+          <button onclick="removeCartItem('${item.cartItemId}')" class="absolute top-2 right-2 text-zinc-500 hover:text-red-400 p-1 transition-colors" title="Remover item">
+            <i class="fa-solid fa-trash-can text-xs"></i>
+          </button>
+        `;
+        list.appendChild(el);
+      });
+
+      const deliveryCost = deliveryMethod === 'entrega' ? RESTAURANT_CONFIG.deliveryFee : 0;
+      const finalTotal = subtotal + deliveryCost;
+
+      document.getElementById('cartSubtotal').innerText = `€${subtotal.toFixed(2)}`;
+      document.getElementById('cartDeliveryFee').innerText = `€${RESTAURANT_CONFIG.deliveryFee.toFixed(2)}`;
+      document.getElementById('cartFinalTotal').innerText = `€${finalTotal.toFixed(2)}`;
+    }
+
+    // Evita que observações digitadas pelo cliente sejam interpretadas como HTML
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.innerText = text;
+      return div.innerHTML;
+    }
+
+    /* ============================================================
+       INTEGRAÇÃO AUTOMÁTICA WHATSAPP (MENSAGEM ESTRUTURADA)
+       ============================================================ */
+    function submitOrderToWhatsapp() {
+      if (cart.length === 0) {
+        alert('Seu carrinho está vazio! Adicione pelo menos um produto ao carrinho.');
+        return;
+      }
+
+      const name = document.getElementById('custName').value.trim();
+      const phone = document.getElementById('custPhone').value.trim();
+
+      if (!name) {
+        alert('Por favor, informe seu nome.');
+        document.getElementById('custName').focus();
+        return;
+      }
+      if (!phone) {
+        alert('Por favor, informe seu telefone de contato.');
+        document.getElementById('custPhone').focus();
+        return;
+      }
+
+      const address = document.getElementById('custAddress').value.trim();
+      const postalCode = document.getElementById('custPostalCode').value.trim();
+      const city = document.getElementById('custCity').value.trim();
+      const orderNotes = document.getElementById('orderGeneralNotes').value.trim();
+
+      if (deliveryMethod === 'entrega' && !address) {
+        alert('Por favor, informe sua morada para entrega.');
+        document.getElementById('custAddress').focus();
+        return;
+      }
+
+      // Cálculo de valores
+      let subtotal = 0;
+      let itemsMessageList = '';
+
+      const CATEGORY_ICONS = { pizzas: '🍕', burgers: '🍔', bebidas: '🥤', acompanhamentos: '🍟' };
+
+      cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        subtotal += itemTotal;
+        const crustText = item.crustName ? ` | ${item.crustName} (+€${item.crustPrice.toFixed(2)})` : '';
+        const obsText = item.notes ? `\n   Obs: ${item.notes}` : '';
+        const icon = CATEGORY_ICONS[item.category] || '🍽️';
+        itemsMessageList += `• ${item.quantity}x ${icon} ${item.name} — ${item.sizeName}${crustText} — €${itemTotal.toFixed(2)}${obsText}\n`;
+      });
+
+      const deliveryCost = deliveryMethod === 'entrega' ? RESTAURANT_CONFIG.deliveryFee : 0;
+      const finalTotal = subtotal + deliveryCost;
+
+      // Montagem da mensagem estruturada para o WhatsApp
+      let msg = `Olá! 👋 Gostaria de fazer um pedido na *Fornalha Vila*.\n\n`;
+      msg += `📋 *ITENS DO PEDIDO*\n`;
+      msg += itemsMessageList;
+      msg += `\nSubtotal: €${subtotal.toFixed(2)}\n`;
+      if (deliveryMethod === 'entrega') {
+        msg += `Taxa de entrega: €${deliveryCost.toFixed(2)}\n`;
+      }
+      msg += `*TOTAL: €${finalTotal.toFixed(2)}*\n\n`;
+
+      if (deliveryMethod === 'entrega') {
+        msg += `📍 *DADOS PARA ENTREGA*\n`;
+        msg += `Nome: ${name}\n`;
+        msg += `Telefone: ${phone}\n`;
+        msg += `Morada: ${address}\n`;
+        if (postalCode) msg += `Código Postal: ${postalCode}\n`;
+        if (city) msg += `Localidade: ${city}\n`;
+      } else {
+        msg += `🏬 *RETIRADA NO RESTAURANTE (TAKEAWAY)*\n`;
+        msg += `Nome: ${name}\n`;
+        msg += `Telefone: ${phone}\n`;
+      }
+
+      if (orderNotes) {
+        msg += `Observações: ${orderNotes}\n`;
+      }
+
+      msg += `\nForma de pagamento: A combinar no WhatsApp\n`;
+      msg += `Obrigado! 🔥🍕🍔`;
+
+      const encodedMsg = encodeURIComponent(msg);
+      const whatsappUrl = `https://wa.me/${RESTAURANT_CONFIG.whatsappNumber}?text=${encodedMsg}`;
+
+      window.open(whatsappUrl, '_blank');
+    }
+
+    // Botões diretos do WhatsApp
+    function directHeroWhatsapp() {
+      const msg = encodeURIComponent("Olá! Gostaria de consultar o cardápio e fazer um pedido na Fornalha Vila.");
+      window.open(`https://wa.me/${RESTAURANT_CONFIG.whatsappNumber}?text=${msg}`, '_blank');
+    }
+
+    function openDirectWhatsapp() {
+      const msg = encodeURIComponent("Olá! Gostaria de fazer um pedido.");
+      window.open(`https://wa.me/${RESTAURANT_CONFIG.whatsappNumber}?text=${msg}`, '_blank');
+    }
+
+    // Controle do menu mobile
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      const icon = document.getElementById('mobileMenuIcon');
+      menu.classList.toggle('hidden');
+      if (menu.classList.contains('hidden')) {
+        icon.className = 'fa-solid fa-bars text-xl';
+      } else {
+        icon.className = 'fa-solid fa-xmark text-xl';
+      }
+    }
+
+    // Inicialização ao carregar a página
+    document.addEventListener('DOMContentLoaded', () => {
+      filterCategory(currentCategory);
+      renderCart();
+      const numDisplay = document.getElementById('displayWhatsappNumber');
+      if (numDisplay) numDisplay.innerText = RESTAURANT_CONFIG.whatsappDisplay;
+    });
+  </script>
+</body>
+</html>
