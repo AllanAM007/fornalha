@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>Fornalha Vila | Pizzaria e Restaurante</title>
-<meta content="Pizzas, burgers artesanais e bebidas. Faça seu pedido na Fornalha Vila de forma rápida e prática pelo WhatsApp." name="description">
-<meta content="Fornalha Vila | Pizzaria e Restaurante" property="og:title">
+<title>Fornalha da Vila | Pizzaria e Restaurante</title>
+<meta content="Pizzas, burgers artesanais e bebidas. Faça seu pedido na Fornalha da Vila de forma rápida e prática pelo WhatsApp." name="description">
+<meta content="Fornalha da Vila | Pizzaria e Restaurante" property="og:title">
 <meta content="Pizzas assadas na fornalha, smash burgers gourmet e muito sabor entregues no conforto da sua casa. Peça pelo WhatsApp!" property="og:description">
 <meta content="website" property="og:type">
 <!-- Tailwind CSS CDN & Font Awesome Icons & Google Fonts -->
@@ -81,9 +81,9 @@
        ========================================== -->
 <header class="fixed top-0 left-0 right-0 z-40 bg-[#0e0e11]/95 backdrop-blur-md border-b border-brand-border/60 transition-all duration-300">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-<!-- LOGO FORNALHA VILA -->
+<!-- LOGO FORNALHA DA VILA -->
 <a class="flex items-center gap-3 group focus:outline-none" href="#inicio">
-<div class="w-12 h-12 rounded-xl bg-brand-darkCard border border-brand-gold/40 flex items-center justify-center p-1 shadow-lg shadow-brand-red/20 group-hover:scale-105 transition-transform duration-300 overflow-hidden"><img alt="Logo Fornalha Vila" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfmihFvPi6z40dTuQohcl6cslJ40xthi--E-0dUCd-g0OaqjzH4SFQ1WNIcDoOvK_081r2gj6OtGBNAjaReOg5nmJPvTaXZoftnJJNXQwk3CeWCLWY8Q22goXlkO4IhRL4eUsZnqfr1hfhnh88RnMl-eKX6v4zWV_MsCBbE6JAyT_43HVMQgUH3xbM4-ZX-vTLsbnS9kYmpX_QyN5phd_nbqdJ7-jR5cjDZt_rregUzmahp8jIhzUkR6Oc2Pmjdjg2yw"></div>
+<div class="w-12 h-12 rounded-xl bg-brand-darkCard border border-brand-gold/40 flex items-center justify-center p-1 shadow-lg shadow-brand-red/20 group-hover:scale-105 transition-transform duration-300 overflow-hidden"><img alt="Logo Fornalha da Vila" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfmihFvPi6z40dTuQohcl6cslJ40xthi--E-0dUCd-g0OaqjzH4SFQ1WNIcDoOvK_081r2gj6OtGBNAjaReOg5nmJPvTaXZoftnJJNXQwk3CeWCLWY8Q22goXlkO4IhRL4eUsZnqfr1hfhnh88RnMl-eKX6v4zWV_MsCBbE6JAyT_43HVMQgUH3xbM4-ZX-vTLsbnS9kYmpX_QyN5phd_nbqdJ7-jR5cjDZt_rregUzmahp8jIhzUkR6Oc2Pmjdjg2yw"></div>
 <div class="flex flex-col">
 <span class="font-serif font-black tracking-wider text-xl leading-tight text-white group-hover:text-amber-300 transition-colors">FORNALHA DA <span class="text-brand-red">VILA</span></span>
 <span class="text-[10px] tracking-[0.25em] uppercase text-zinc-400 font-semibold">
@@ -277,7 +277,7 @@
 <div>
 <h3 class="text-base font-bold text-white mb-1">Pedidos WhatsApp</h3>
 <p class="text-sm text-zinc-400">Atendimento ágil para entrega rápida.</p>
-<p class="text-sm font-bold text-zinc-200 mt-1" id="displayWhatsappNumber">+351 912 345 678</p>
+<p class="text-sm font-bold text-zinc-200 mt-1" id="displayWhatsappNumber">+351 932 851 736</p>
 </div>
 </div>
 <div class="p-6 rounded-2xl bg-brand-darkCard border border-brand-border flex items-start gap-4">
@@ -331,7 +331,7 @@
 </button>
 <!-- Imagem do Modal -->
 <div class="relative h-52 w-full shrink-0 bg-zinc-900">
-<img alt="Produto Fornalha Vila" class="w-full h-full object-cover" id="modalProductImage" src="">
+<img alt="Produto Fornalha da Vila" class="w-full h-full object-cover" id="modalProductImage" src="">
 <div class="absolute inset-0 bg-gradient-to-t from-[#151519] via-transparent to-transparent"></div>
 <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-brand-red text-white text-xs font-bold uppercase tracking-wider shadow" id="modalProductCategory">PIZZAS</span>
 </div>
@@ -497,11 +497,11 @@
        ========================================== -->
 <script>
     /* ============================================================
-       CONFIGURAÇÕES GLOBAIS DA FORNALHA VILA
+       CONFIGURAÇÕES GLOBAIS DA FORNALHA DA VILA
        ============================================================ */
     const RESTAURANT_CONFIG = {
-      whatsappNumber: '351912345678', // Formato internacional
-      whatsappDisplay: '+351 912 345 678',
+      whatsappNumber: '351932851736', // Formato internacional
+      whatsappDisplay: '+351 932 851 736',
       deliveryFee: 2.50, // Taxa de entrega padrão em Euros
       currency: '€'
     };
@@ -1228,7 +1228,7 @@
       const finalTotal = subtotal + deliveryCost;
 
       // Montagem da mensagem estruturada para o WhatsApp
-      let msg = `Olá! 👋 Gostaria de fazer um pedido na *Fornalha Vila*.\n\n`;
+      let msg = `Olá! 👋 Gostaria de fazer um pedido na *Fornalha da Vila*.\n\n`;
       msg += `📋 *ITENS DO PEDIDO*\n`;
       msg += itemsMessageList;
       msg += `\nSubtotal: €${subtotal.toFixed(2)}\n`;
@@ -1265,7 +1265,7 @@
 
     // Botões diretos do WhatsApp
     function directHeroWhatsapp() {
-      const msg = encodeURIComponent("Olá! Gostaria de consultar o cardápio e fazer um pedido na Fornalha Vila.");
+      const msg = encodeURIComponent("Olá! Gostaria de consultar o cardápio e fazer um pedido na Fornalha da Vila.");
       window.open(`https://wa.me/${RESTAURANT_CONFIG.whatsappNumber}?text=${msg}`, '_blank');
     }
 
