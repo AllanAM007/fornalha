@@ -130,10 +130,11 @@
 <!-- ==========================================
        HERO SECTION
        ========================================== -->
-<section class="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-black" id="inicio" style="background: radial-gradient(circle at 85% 20%, rgba(229, 37, 42, 0.22) 0%, rgba(229, 37, 42, 0.05) 35%, rgb(5, 5, 5) 70%, rgb(0, 0, 0) 100%), rgb(0, 0, 0);">
-<!-- Luzes de fundo atmosféricas -->
-<div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-red/15 rounded-full blur-[140px] pointer-events-none"></div>
-<div class="absolute top-1/3 right-10 w-[400px] h-[400px] bg-amber-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+<section class="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-[#070000] lg:min-h-[640px]" id="inicio">
+<!-- Imagem de fundo: forno a lenha (fica à direita no desktop e atrás do texto no celular) -->
+<img alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover object-top lg:object-contain lg:object-right opacity-60 lg:opacity-100 pointer-events-none select-none" src="img/hero-forno.jpg">
+<!-- Degradê para manter o texto legível sobre a imagem -->
+<div class="absolute inset-0 bg-gradient-to-b from-[#070000]/40 via-[#070000]/85 to-[#070000] lg:bg-gradient-to-r lg:from-[#070000] lg:via-[#070000]/40 lg:to-transparent pointer-events-none"></div>
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 <!-- TEXTO DO HERO -->
@@ -180,7 +181,7 @@
 </div>
 </div>
 <!-- IMAGEM EM DESTAQUE GASTRONÔMICA -->
-<div class="lg:col-span-5 relative"><div class="relative mx-auto max-w-md lg:max-w-none flex items-center justify-center p-4 bg-black rounded-2xl"></div></div>
+<div class="hidden lg:block lg:col-span-5" aria-hidden="true"></div>
 </div>
 </div>
 </section>
