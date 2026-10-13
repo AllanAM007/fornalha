@@ -802,6 +802,37 @@
       ['Somersby Mini', 1.50, '🍏', 'Sidra bem gelada.']
     ];
 
+    // Fotos das bebidas (as que ainda não estão aqui mostram o emoji)
+    const DRINK_IMAGES = {
+      'Coca-Cola lata 33 cl': 'img/bebida-coca-cola-lata.jpg',
+      'Coca-Cola Zero lata 33 cl': 'img/bebida-coca-cola-zero-lata.jpg',
+      'Coca-Cola 1 L': 'img/bebida-coca-cola-1-5l.jpg',
+      'Coca-Cola 1,5 L': 'img/bebida-coca-cola-1-5l.jpg',
+      'Sumol Laranja 33 cl': 'img/bebida-sumol-laranja.jpg',
+      'Sumol Ananás 33 cl': 'img/bebida-sumol-ananas.jpg',
+      'Guaraná Antarctica 33 cl': 'img/bebida-guarana-lata.jpg',
+      '7Up 33 cl': 'img/bebida-7up.jpg',
+      'Pepsi 33 cl': 'img/bebida-pepsi-lata.jpg',
+      'Pepsi Zero 33 cl': 'img/bebida-pepsi-zero.jpg',
+      'Compal Manga e Laranja': 'img/bebida-compal-manga-laranja.jpg',
+      'Água 50 cl': 'img/bebida-agua-50cl.jpg',
+      'Água 1,5 L': 'img/bebida-agua-50cl.jpg',
+      'Frize Laranja': 'img/bebida-frize-laranja.jpg',
+      'Sagres Mini': 'img/bebida-sagres-mini.jpg',
+      'Sagres Média': 'img/bebida-sagres-media.jpg',
+      'Super Bock Mini': 'img/bebida-super-bock-mini.jpg',
+      'Super Bock Média': 'img/bebida-super-bock-media.jpg',
+      'Heineken': 'img/bebida-heineken.jpg',
+      'Guaraná 1,5 L': 'img/bebida-guarana-1-5l.jpg',
+      'Ice Tea Manga 33 cl': 'img/bebida-ice-tea-manga.jpg',
+      'Ice Tea Pêssego 33 cl': 'img/bebida-ice-tea-pessego.jpg',
+      'Jarro de Vinho': 'img/bebida-jarro-vinho.jpg',
+      'Imperial': 'img/bebida-imperial.jpg',
+      'Taça de Vinho': 'img/bebida-taca-vinho.jpg',
+      'Somersby Média': 'img/bebida-somersby-media.jpg',
+      'Somersby Mini': 'img/bebida-somersby-mini.jpg'
+    };
+
     DRINKS_DATA.forEach(([name, price, emoji, description], i) => {
       PRODUCTS_DATA.push({
         id: `bebida-${i + 1}`,
@@ -809,6 +840,7 @@
         name,
         description,
         emoji,
+        image: DRINK_IMAGES[name],
         sizes: [{ name: 'Unidade', price }]
       });
     });
@@ -816,7 +848,9 @@
     // Imagem do produto, ou o emoji num fundo escuro quando não há foto
     function productVisualHtml(product, imgClass, emojiClass) {
       if (product.image) {
-        return `<img src="${product.image}" alt="${product.name}" loading="lazy" class="${imgClass}">`;
+        // Fotos de bebidas são quadradas com a garrafa ao centro: não cortar
+        const cls = product.category === 'bebidas' ? imgClass.replace('object-cover', 'object-contain') : imgClass;
+        return `<img src="${product.image}" alt="${product.name}" loading="lazy" class="${cls}">`;
       }
       return `<div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#2a1214] via-brand-darkCard to-black"><span class="${emojiClass}" aria-hidden="true">${product.emoji || '🍽️'}</span></div>`;
     }
@@ -862,7 +896,7 @@
         card.className = `bg-brand-darkCard rounded-2xl border ${isFornalhaSpecial ? 'border-brand-gold/80 shadow-brand-red/20 shadow-xl' : 'border-brand-border/80'} hover:border-brand-gold/50 overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col group`;
 
         card.innerHTML = `
-          <div class="relative ${product.image ? 'h-48' : 'h-32'} w-full overflow-hidden bg-zinc-900 cursor-pointer" onclick="openProductModal('${product.id}')">
+          <div class="relative ${product.category === 'bebidas' ? 'h-40' : 'h-48'} w-full overflow-hidden bg-zinc-900 cursor-pointer" onclick="openProductModal('${product.id}')">
             ${productVisualHtml(product, 'w-full h-full object-cover group-hover:scale-105 transition-transform duration-500', 'text-6xl group-hover:scale-110 transition-transform duration-500')}
             ${product.badge ? `<span class="absolute top-3 left-3 px-2.5 py-1 rounded-full ${badgeClasses} text-[10px] font-extrabold uppercase tracking-wider shadow">${product.badge}</span>` : ''}
             ${product.category === 'pizzas' ? `<span class="absolute bottom-3 right-3 px-2 py-0.5 rounded-md bg-black/75 border border-brand-gold/40 text-brand-goldLight text-[10px] font-semibold tracking-wide backdrop-blur-sm">+ Borda Opcional</span>` : ''}
@@ -942,6 +976,8 @@
       const modalEmoji = document.getElementById('modalProductEmoji');
       if (product.image) {
         modalImg.src = product.image;
+        modalImg.classList.toggle('object-contain', product.category === 'bebidas');
+        modalImg.classList.toggle('object-cover', product.category !== 'bebidas');
         modalImg.classList.remove('hidden');
         modalEmoji.classList.add('hidden');
         modalEmoji.classList.remove('flex');
