@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>Fornalha Vila | Pizzaria e Restaurante</title>
-<meta content="Pizzas, burgers artesanais e bebidas. Faça seu pedido na Fornalha Vila de forma rápida e prática pelo WhatsApp." name="description">
-<meta content="Fornalha Vila | Pizzaria e Restaurante" property="og:title">
+<title>Fornalha da Vila | Pizzaria e Restaurante</title>
+<meta content="Pizzas, burgers artesanais e bebidas. Faça seu pedido na Fornalha da Vila de forma rápida e prática pelo WhatsApp." name="description">
+<meta content="Fornalha da Vila | Pizzaria e Restaurante" property="og:title">
 <meta content="Pizzas assadas na fornalha, smash burgers gourmet e muito sabor entregues no conforto da sua casa. Peça pelo WhatsApp!" property="og:description">
 <meta content="website" property="og:type">
 <!-- Tailwind CSS CDN & Font Awesome Icons & Google Fonts -->
@@ -81,9 +81,9 @@
        ========================================== -->
 <header class="fixed top-0 left-0 right-0 z-40 bg-[#0e0e11]/95 backdrop-blur-md border-b border-brand-border/60 transition-all duration-300">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-<!-- LOGO FORNALHA VILA -->
+<!-- LOGO FORNALHA DA VILA -->
 <a class="flex items-center gap-3 group focus:outline-none" href="#inicio">
-<div class="w-12 h-12 rounded-xl bg-brand-darkCard border border-brand-gold/40 flex items-center justify-center p-1 shadow-lg shadow-brand-red/20 group-hover:scale-105 transition-transform duration-300 overflow-hidden"><img alt="Logo Fornalha Vila" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfmihFvPi6z40dTuQohcl6cslJ40xthi--E-0dUCd-g0OaqjzH4SFQ1WNIcDoOvK_081r2gj6OtGBNAjaReOg5nmJPvTaXZoftnJJNXQwk3CeWCLWY8Q22goXlkO4IhRL4eUsZnqfr1hfhnh88RnMl-eKX6v4zWV_MsCBbE6JAyT_43HVMQgUH3xbM4-ZX-vTLsbnS9kYmpX_QyN5phd_nbqdJ7-jR5cjDZt_rregUzmahp8jIhzUkR6Oc2Pmjdjg2yw"></div>
+<div class="w-12 h-12 rounded-xl bg-[#070000] border border-brand-gold/40 flex items-center justify-center shadow-lg shadow-brand-red/20 group-hover:scale-105 transition-transform duration-300 overflow-hidden"><img alt="Logo Fornalha da Vila" class="w-full h-full object-cover" src="img/logo-fornalha-sm.jpg"></div>
 <div class="flex flex-col">
 <span class="font-serif font-black tracking-wider text-xl leading-tight text-white group-hover:text-amber-300 transition-colors">FORNALHA DA <span class="text-brand-red">VILA</span></span>
 <span class="text-[10px] tracking-[0.25em] uppercase text-zinc-400 font-semibold">
@@ -130,10 +130,11 @@
 <!-- ==========================================
        HERO SECTION
        ========================================== -->
-<section class="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-black" id="inicio" style="background: radial-gradient(circle at 85% 20%, rgba(229, 37, 42, 0.22) 0%, rgba(229, 37, 42, 0.05) 35%, rgb(5, 5, 5) 70%, rgb(0, 0, 0) 100%), rgb(0, 0, 0);">
-<!-- Luzes de fundo atmosféricas -->
-<div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-red/15 rounded-full blur-[140px] pointer-events-none"></div>
-<div class="absolute top-1/3 right-10 w-[400px] h-[400px] bg-amber-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+<section class="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-[#070000] lg:min-h-[640px]" id="inicio">
+<!-- Imagem de fundo: forno a lenha (fica à direita no desktop e atrás do texto no celular) -->
+<img alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover object-top lg:object-contain lg:object-right opacity-60 lg:opacity-100 pointer-events-none select-none" src="img/hero-forno.jpg">
+<!-- Degradê para manter o texto legível sobre a imagem -->
+<div class="absolute inset-0 bg-gradient-to-b from-[#070000]/40 via-[#070000]/85 to-[#070000] lg:bg-gradient-to-r lg:from-[#070000] lg:via-[#070000]/40 lg:to-transparent pointer-events-none"></div>
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 <!-- TEXTO DO HERO -->
@@ -180,7 +181,7 @@
 </div>
 </div>
 <!-- IMAGEM EM DESTAQUE GASTRONÔMICA -->
-<div class="lg:col-span-5 relative"><div class="relative mx-auto max-w-md lg:max-w-none flex items-center justify-center p-4 bg-black rounded-2xl"></div></div>
+<div class="hidden lg:block lg:col-span-5" aria-hidden="true"></div>
 </div>
 </div>
 </section>
@@ -224,7 +225,7 @@
 <section class="py-20 bg-[#0c0c0e] relative overflow-hidden border-t border-brand-border/40" id="sobre">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-<div class="lg:col-span-6 relative"><div class="relative space-y-4"><div class="relative rounded-2xl overflow-hidden border border-brand-border/80 shadow-2xl group"><img alt="Chef pizzaiolo na fornalha a lenha artesanal" class="w-full h-64 md:h-72 object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0t5_uOWmlu3KwFIP3lPnQs7QHaM_9q1liuF9N-tXrnET73PrYZCVOtIxy3RJj1vdkA4B5g2lA4uFcHpHTgadJTy-BKOFbDixf9Khk_gug8METdKdH6lDFL0piKLbjY0aqZjigOYIIi_QIE619bx_jjLQLCXTbs1t1ElRqL_-p6oO7eyFI-gNiYnYfGErsbg5T5inYUAxlA5sgVKlld3PcbanbOzp_7alQvuo-Sy7rT9Zl8LaGgLMX"><div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div><span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-brand-red text-white text-[10px] font-extrabold uppercase tracking-wider shadow"><i class="fa-solid fa-fire text-amber-300 mr-1"></i>Forno a Lenha Vivo</span><div class="absolute bottom-4 left-4 right-4"><p class="font-serif text-lg font-bold text-white mb-0.5">Mestres da Fornalha</p><p class="text-zinc-300 text-xs">Arte tradicional italiana e forno aquecido com lenha selecionada.</p></div></div><div class="relative rounded-2xl overflow-hidden border border-brand-gold/40 shadow-2xl group"><img alt="Pizza artesanal saindo do forno a lenha" class="w-full h-52 md:h-60 object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDN-Bx3IXRU5IDm4nBz5nsUlsNg61bxX5yBGxcrAkivZplMEwFBPwasQarv8mf0caAyaPLqCdvHyDLr_pGbGg6PaYqvG7kc41Fehk0XY5brCIT45x436fEk6uI-yNvzRZXLKIo7XQH8QveSUutwkn6yHnDVdrqSCfv8vDtuxCjRNsAJN3uO3ULMScPooLLIqGYcnCPRS0caE3cG_V_eqJO9mZJWHqTwhV2VgX-hfnmuBk-vIUhqds0N"><div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div><div class="absolute bottom-4 left-4 right-4 flex items-center justify-between"><div><p class="font-serif text-lg font-bold text-white mb-0.5">A autêntica alma da fornalha</p><p class="text-zinc-300 text-xs">Borda aerada e crocante gratinada em brasa viva.</p></div><span class="hidden sm:inline-flex px-2.5 py-1 rounded-lg bg-black/75 border border-brand-gold/40 text-brand-goldLight text-[10px] font-bold backdrop-blur-sm">100% Artesanal</span></div></div></div></div>
+<div class="lg:col-span-6 relative"><div class="relative mx-auto max-w-md lg:max-w-lg rounded-2xl overflow-hidden border border-brand-gold/40 shadow-2xl shadow-brand-red/20 bg-[#070000]"><img alt="Logo Fornalha da Vila: forno a lenha com pizza e pás cruzadas" class="w-full h-auto" loading="lazy" src="img/logo-fornalha.jpg"></div></div>
 <div class="lg:col-span-6 space-y-6">
 <div class="inline-flex items-center gap-2 text-brand-gold text-xs font-bold tracking-widest uppercase">
 <i class="fa-solid fa-wheat-awn"></i> Nossa História &amp; Valores
@@ -276,7 +277,7 @@
 <div>
 <h3 class="text-base font-bold text-white mb-1">Pedidos WhatsApp</h3>
 <p class="text-sm text-zinc-400">Atendimento ágil para entrega rápida.</p>
-<p class="text-sm font-bold text-zinc-200 mt-1" id="displayWhatsappNumber">+351 912 345 678</p>
+<p class="text-sm font-bold text-zinc-200 mt-1" id="displayWhatsappNumber">+351 932 851 736</p>
 </div>
 </div>
 <div class="p-6 rounded-2xl bg-brand-darkCard border border-brand-border flex items-start gap-4">
@@ -330,7 +331,8 @@
 </button>
 <!-- Imagem do Modal -->
 <div class="relative h-52 w-full shrink-0 bg-zinc-900">
-<img alt="Produto Fornalha Vila" class="w-full h-full object-cover" id="modalProductImage" src="">
+<img alt="Produto Fornalha da Vila" class="w-full h-full object-cover" id="modalProductImage" src="">
+<div class="hidden w-full h-full items-center justify-center bg-gradient-to-br from-[#2a1214] via-brand-darkCard to-black text-8xl" id="modalProductEmoji" aria-hidden="true"></div>
 <div class="absolute inset-0 bg-gradient-to-t from-[#151519] via-transparent to-transparent"></div>
 <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-brand-red text-white text-xs font-bold uppercase tracking-wider shadow" id="modalProductCategory">PIZZAS</span>
 </div>
@@ -496,11 +498,11 @@
        ========================================== -->
 <script>
     /* ============================================================
-       CONFIGURAÇÕES GLOBAIS DA FORNALHA VILA
+       CONFIGURAÇÕES GLOBAIS DA FORNALHA DA VILA
        ============================================================ */
     const RESTAURANT_CONFIG = {
-      whatsappNumber: '351912345678', // Formato internacional
-      whatsappDisplay: '+351 912 345 678',
+      whatsappNumber: '351932851736', // Formato internacional
+      whatsappDisplay: '+351 932 851 736',
       deliveryFee: 2.50, // Taxa de entrega padrão em Euros
       currency: '€'
     };
@@ -509,18 +511,19 @@
        IMAGENS DOS PRODUTOS
        ============================================================ */
     const IMG = {
-      pizzaDefault: 'https://lh3.googleusercontent.com/aida/AEtjO1UYehEkIVDoRbI1Sr0meRV6CS-8LKb6CZRQX5xAk2BEojXsM-Rmy-KPpPkZqvm-wnaMoWzOt_bM73MPpS0ugoTwUtw7EvF_ohJjG0eEsxUx8u2pFA7S3XyxGpiEmBE2U6EuMJV_VuoU9C37gJD6OQ4xS2WrutyL4fweGGkSRpJbm9194BY3n1bCKMFb0WOrL4XYricZlzFQ5VRpW4IsbgioIxIEs6_Xmuz9XI5yDH4XSwuPe-Vwst79Dw',
-      pizzaCarijo: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAi98Qm_SG8Li44JZ75E016eJBp5cFcRDOJ2hAMTGnE_5hBBTBYN7br9-jisl4PpUtWl_c1KOsdeUnLc_GTHLzLfS7g4b60LQzzEp2lnNZte8SLqHLrfAvo0YBYB5NUa1Ji0wsKC3DNzbZ3CfnCI_zLpDSnPJu6uxZykXefghq8moAvi5zwmn4B6eWFMMY-fC_33fpkIeX1Ucywp9v-r5gKAUhdo6kw9AWsfd_w_ZyRQM9CwIywTem2oKxM_-7yrhFRvw',
-      pizzaFiambre: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCEg3El04abhJe_LYLj-Wl0zyTPFA8_XfxNdZyEr5z7_AQWoiZ7yIvW2tjB_HiYnPY0IZjoAHzqwQ9YbMb0L42cL0JJs6joq7mpYlS7BOA4y3AX5BJarZFU27QHRYEnhjcgnXjN5jYC1XOImCPhyTwl8QhIqkbrzj2TTJxJH1G0El0KZkFZeCPlCYmpVJLn8brIfAmPWIoSM_GxH7VyWG_v1UhXdl6VnBaDa-Q869br4mJkc1J5GqmUNt2AcVxL-U8AVw',
-      pizzaMozarela: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBAlNxxkDcLzvx_rL0ZJW_4NGArhYynFA9AvrYHevD3rjX4_qimvAkJxqykoo2T_QF2I4E8Rjb5am7mBBeFi3oGrmo2Z5XLkmF68JTdtpooHK_lQie-VRy6rZg9OUklGCgUKb5x1fKiQMrw0apD4K08wQDTB74wy53hXjv5htbvJJPeExCc3mXohdvKXJrGN_JSjewP7zJ54l9oncxktyBRFJ6DKyHJ1DIozW3GLcnEI1d8B8HVSTafgVVaSikKEjDw1w',
-      pizzaMarguerita: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDYodgKUxxyST-015hiO5Oln5CMRd2TXqAfxDlaeL_uDuqGToC6quja1eBhq89QZfY1_5z3HfL0I5rXg00YQT3Z0w9os9tJK9S6MSsd63I707Cs3q2qBI92S9zX83QpaCQGoa7DYx9JBejZJQ6WBUQWIF3C6HJAmlyayoZ8HIEJFEPhnWNSROZBElw_Ah0hdJANNgh5dxT-8OKGTsfWyF3PYwljcSgR15QCnGUKOO9mdUps26YkOUp5M9lvJz9AZ6f3HQ',
-      pizzaBrasileira: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD_VuQhKb4TMKEO-EH9dTFufUA6XeomegryrPsHdxoYP_2JyoD4MbR2JlRHXGsHVIZ6hAojuh0fDXCuznQDnp9nGi1raDKSvbcg1GK_O2s-QZ0q7smhXuxAJ1-YdrHfMNijUo5faNBf4y20_DUMsqqsd74tbBZW3rSUxu6P57EfM-g--HoGZpLPeuRSRuSPQ69UgHzmHNBmSaDRNdUv2ARetMjiDwspObDjuC6nQHdXHVCFw1TwDIwkmEgisuflrgDvww',
-      pizzaSiciliana: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAKvC7e_iWEAszjgoDN_GceEv_NO27vybYBsHUIJgT8m9Fs8LRwOK60oTC58Sm8NhDm0OpxLYiBiWH18dk5mA_bNYmPSs_gjvyY7VqGvr5M1IoDFMt21sp50D5jvHR5oKn-Hi2H3ywNxn1PGEQtSuAPzgpttzHkcSZDnrEtxUXzoYEAEbQgRUgdxJ5Y2rRlHsFTkwe4u_toWytXSIbEzpChBsDNLb0XSi9IV_bzxLAR0lr1YKSo6FnkZEi-Fh75Jn5uBg',
-      pizzaQuatroQueijos: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAk3II7eBvRjwRzl7epfoV3oBZCJDNdGvwQ49fe-7wzP6LGOOFIVpextzIlrFCvGsViMzW6G1RZa_uzCGrzZJDpP_mxHKW1GIxjgYmmPLn-XLfPO5iVIRyuXQboQ3LCj5UDJ_DbRVcE14tRpZbiCiINh3NjuAja1Xhn9uSbbghMR3jU9TyONjmoBTH4sEfNbDV4CejyB7nESqlGbUqi5p6xGbbBCjUlMX_MEMY7KccvCOFx1Lqz3Mo9nzZRwe3T0eaU7A',
-      pizzaFrangoCatupiry: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCYUpGF4K3cbFJIRnCvoqwbtED2Uuzt8ZOSePeaps2DAfaQH60CT2E5NLxNFVkhWQfNxjFSjpSa2dsSsjs6_HMbAWaCTmcXEspH4QXIPY8MQ2gDzpjx_cqD-ejnCJZo0dNxXzrBwx5JGelgiDD-ZTuU6AeMZBcCSvYjKDaNaNWplRek9oU689NY9vaqFID3pbWzkwPeOTUz4aBt3bBYeWCvZ1ZeMAjA7LdGIo5G-bSzmaRcpjykhAGh3baTvp4TzNF1Mg',
-      pizzaPortuguesa: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD2dFo6b_0GX_WhdTFYpN3gJen2irB6LOosGJUHJzvB6QLr_l5DvRV8HQZlhuTmo5tl5A0UYVuok0ieuUCQRn9nxKEGeq1OSNsRgYVznfYMkKi6yURn2xRZcDS3ax9aQf1IwzfgiSptz9RyuUKcJSH0FZj1_tYwIoZOdxa5SRNvepxnMWNEcjkWAwTqpto_QfXH4stahASQz2ec9BJGz_xrO6eGrpesUgzbJW-xv7xjvVUut7AA2rN0325if9Bc6mZz8A',
-      burger: 'https://lh3.googleusercontent.com/aida/AEtjO1XxMnTEVyHaL4OZFod0gtKVa3inheR_OS-gUDXonC4s6MyLyN8pOaCCcVIzxauUXZEGFDWF1WkK7Kb0Zh3of1tLRYssvWrD4cvVgVtzAKmBzUSQqcr-cM6sTgUOmp_Vb_mswe8-5lqJzv_WzGV-VhQxo41ebPm0qfYl7Gio_8o9WIxOmIG3yOCb-Da5IFg8Ycp_LPa4Qj5uyQfRQgwerLiEODrUqk4_1STcfb90u3OZWDaqH7XyXH_2SA',
-      drink: 'https://lh3.googleusercontent.com/aida/AEtjO1W1T_fHmIzIHrt0IILDQ6jg0RR76hubHlbQPbKE97CWGZItdTjAj7WmJRFHnT0T2cuZiqeYTyhb6ap06SIKS9ALFZEMoY5fSDouGOHIq-AVAJkcpJxUvTMZrqi49nuob-W1bVxrU5Xisv_PZ1t7fAkv5MrcXluLTQQyMIWK7QWPiMMVyWNli4NZk7us5uhaZA8vHhc88WpGGmKQC72naoiIy25RrBTZ5OfXH6UOjqph2Ps48zY_CRkV6w'
+      pizzaAtum: 'img/pizza-atum.jpg',
+      pizzaPepperoni: 'img/pizza-pepperoni.jpg',
+      pizzaBacon: 'img/pizza-bacon.jpg',
+      pizzaCarijo: 'img/pizza-carijo.jpg',
+      pizzaFiambre: 'img/pizza-fiambre.jpg',
+      pizzaMozarela: 'img/pizza-mozarela.jpg',
+      pizzaMarguerita: 'img/pizza-marguerita.jpg',
+      pizzaBrasileira: 'img/pizza-brasileira.jpg',
+      pizzaSiciliana: 'img/pizza-siciliana.jpg',
+      pizzaQuatroQueijos: 'img/pizza-quatro-queijos.jpg',
+      pizzaFrangoCatupiry: 'img/pizza-frango-catupiry.jpg',
+      pizzaPortuguesa: 'img/pizza-portuguesa.jpg',
+      burger: 'https://lh3.googleusercontent.com/aida/AEtjO1XxMnTEVyHaL4OZFod0gtKVa3inheR_OS-gUDXonC4s6MyLyN8pOaCCcVIzxauUXZEGFDWF1WkK7Kb0Zh3of1tLRYssvWrD4cvVgVtzAKmBzUSQqcr-cM6sTgUOmp_Vb_mswe8-5lqJzv_WzGV-VhQxo41ebPm0qfYl7Gio_8o9WIxOmIG3yOCb-Da5IFg8Ycp_LPa4Qj5uyQfRQgwerLiEODrUqk4_1STcfb90u3OZWDaqH7XyXH_2SA'
     };
 
     /* ============================================================
@@ -543,7 +546,7 @@
         category: 'pizzas',
         name: 'Pizza Atum',
         description: 'Molho de tomate, atum, cebola, queijo mussarela e orégano.',
-        image: IMG.pizzaDefault,
+        image: IMG.pizzaAtum,
         badge: 'Tradicional',
         sizes: [
           { name: 'Média', price: 10.00 },
@@ -555,7 +558,7 @@
         category: 'pizzas',
         name: 'Pizza Bacon',
         description: 'Molho de tomate, queijo mussarela, bacon e orégano.',
-        image: IMG.pizzaDefault,
+        image: IMG.pizzaBacon,
         badge: 'Crocante',
         sizes: [
           { name: 'Média', price: 10.50 },
@@ -590,7 +593,7 @@
         category: 'pizzas',
         name: 'Pizza Pepperoni',
         description: 'Molho de tomate, queijo mussarela, pepperoni e orégano.',
-        image: IMG.pizzaDefault,
+        image: IMG.pizzaPepperoni,
         badge: 'Mais Pedida',
         sizes: [
           { name: 'Média', price: 11.00 },
@@ -750,35 +753,13 @@
         ]
       },
 
-      // --- BEBIDAS ---
-      {
-        id: 'bebida-coca',
-        category: 'bebidas',
-        name: 'Coca-Cola Original 330ml',
-        description: 'Lata gelada de 330ml para acompanhar sua refeição.',
-        image: IMG.drink,
-        sizes: [
-          { name: '330ml', price: 1.80 }
-        ]
-      },
-      {
-        id: 'bebida-cerveja',
-        category: 'bebidas',
-        name: 'Cerveja Artesanal da Casa',
-        description: 'Cerveja gelada artesanal perfeita com pizzas e burgers.',
-        image: IMG.burger, // TODO: trocar por foto da cerveja
-        sizes: [
-          { name: 'Garrafa 330ml', price: 2.80 }
-        ]
-      },
-
       // --- ACOMPANHAMENTOS ---
       {
         id: 'acomp-fritas-alecrim',
         category: 'acompanhamentos',
         name: 'Batata Rústica com Alecrim',
         description: 'Batatas douradas estaladiças temperadas com sal marinho, alecrim fresco e molho aioli artesanal.',
-        image: IMG.drink, // TODO: trocar por foto da batata
+        emoji: '🍟', // TODO: trocar por foto da batata
         badge: 'Crocante',
         sizes: [
           { name: 'Porção Média', price: 4.50 },
@@ -786,6 +767,59 @@
         ]
       }
     ];
+
+    /* ============================================================
+       BEBIDAS (sem foto: o card mostra o emoji no lugar da imagem)
+       [nome, preço, emoji, descrição]
+       ============================================================ */
+    const DRINKS_DATA = [
+      ['Coca-Cola lata 33 cl', 1.60, '🥤', 'Refrigerante bem gelado.'],
+      ['Coca-Cola Zero lata 33 cl', 1.60, '🥤', 'Refrigerante bem gelado.'],
+      ['Coca-Cola 1 L', 2.50, '🥤', 'Garrafa para partilhar.'],
+      ['Coca-Cola 1,5 L', 3.00, '🥤', 'Garrafa para partilhar.'],
+      ['Sumol Laranja 33 cl', 1.60, '🍊', 'Refrigerante bem gelado.'],
+      ['Sumol Ananás 33 cl', 1.60, '🍍', 'Refrigerante bem gelado.'],
+      ['Guaraná Antarctica 33 cl', 1.60, '🥤', 'Refrigerante bem gelado.'],
+      ['Guaraná 1,5 L', 3.00, '🥤', 'Garrafa para partilhar.'],
+      ['Ice Tea Manga 33 cl', 1.60, '🧃', 'Chá gelado.'],
+      ['Ice Tea Pêssego 33 cl', 1.60, '🧃', 'Chá gelado.'],
+      ['7Up 33 cl', 1.60, '🥤', 'Refrigerante bem gelado.'],
+      ['Pepsi 33 cl', 1.60, '🥤', 'Refrigerante bem gelado.'],
+      ['Pepsi Zero 33 cl', 1.60, '🥤', 'Refrigerante bem gelado.'],
+      ['Frize Laranja', 1.60, '🍊', 'Água com gás e sabor a laranja.'],
+      ['Compal Manga e Laranja', 1.60, '🧃', 'Néctar de fruta.'],
+      ['Água 50 cl', 1.00, '💧', 'Água mineral.'],
+      ['Água 1,5 L', 1.60, '💧', 'Água mineral.'],
+      ['Sagres Mini', 1.20, '🍺', 'Cerveja bem gelada.'],
+      ['Sagres Média', 1.50, '🍺', 'Cerveja bem gelada.'],
+      ['Super Bock Mini', 1.20, '🍺', 'Cerveja bem gelada.'],
+      ['Super Bock Média', 1.50, '🍺', 'Cerveja bem gelada.'],
+      ['Heineken', 1.40, '🍺', 'Cerveja bem gelada.'],
+      ['Jarro de Vinho', 3.00, '🍷', 'Vinho da casa.'],
+      ['Taça de Vinho', 1.50, '🍷', 'Vinho da casa.'],
+      ['Imperial', 1.40, '🍺', 'Cerveja de pressão.'],
+      ['Somersby Média', 1.80, '🍏', 'Sidra bem gelada.'],
+      ['Somersby Mini', 1.50, '🍏', 'Sidra bem gelada.']
+    ];
+
+    DRINKS_DATA.forEach(([name, price, emoji, description], i) => {
+      PRODUCTS_DATA.push({
+        id: `bebida-${i + 1}`,
+        category: 'bebidas',
+        name,
+        description,
+        emoji,
+        sizes: [{ name: 'Unidade', price }]
+      });
+    });
+
+    // Imagem do produto, ou o emoji num fundo escuro quando não há foto
+    function productVisualHtml(product, imgClass, emojiClass) {
+      if (product.image) {
+        return `<img src="${product.image}" alt="${product.name}" loading="lazy" class="${imgClass}">`;
+      }
+      return `<div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#2a1214] via-brand-darkCard to-black"><span class="${emojiClass}" aria-hidden="true">${product.emoji || '🍽️'}</span></div>`;
+    }
 
     /* ============================================================
        ESTADO DA APLICAÇÃO (CARRINHO E MODAL)
@@ -828,8 +862,8 @@
         card.className = `bg-brand-darkCard rounded-2xl border ${isFornalhaSpecial ? 'border-brand-gold/80 shadow-brand-red/20 shadow-xl' : 'border-brand-border/80'} hover:border-brand-gold/50 overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col group`;
 
         card.innerHTML = `
-          <div class="relative h-48 w-full overflow-hidden bg-zinc-900 cursor-pointer" onclick="openProductModal('${product.id}')">
-            <img src="${product.image}" alt="${product.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="relative ${product.image ? 'h-48' : 'h-32'} w-full overflow-hidden bg-zinc-900 cursor-pointer" onclick="openProductModal('${product.id}')">
+            ${productVisualHtml(product, 'w-full h-full object-cover group-hover:scale-105 transition-transform duration-500', 'text-6xl group-hover:scale-110 transition-transform duration-500')}
             ${product.badge ? `<span class="absolute top-3 left-3 px-2.5 py-1 rounded-full ${badgeClasses} text-[10px] font-extrabold uppercase tracking-wider shadow">${product.badge}</span>` : ''}
             ${product.category === 'pizzas' ? `<span class="absolute bottom-3 right-3 px-2 py-0.5 rounded-md bg-black/75 border border-brand-gold/40 text-brand-goldLight text-[10px] font-semibold tracking-wide backdrop-blur-sm">+ Borda Opcional</span>` : ''}
           </div>
@@ -904,7 +938,20 @@
       selectedCrust = 'none';
       modalQuantity = 1;
 
-      document.getElementById('modalProductImage').src = product.image;
+      const modalImg = document.getElementById('modalProductImage');
+      const modalEmoji = document.getElementById('modalProductEmoji');
+      if (product.image) {
+        modalImg.src = product.image;
+        modalImg.classList.remove('hidden');
+        modalEmoji.classList.add('hidden');
+        modalEmoji.classList.remove('flex');
+      } else {
+        modalImg.removeAttribute('src');
+        modalImg.classList.add('hidden');
+        modalEmoji.innerText = product.emoji || '🍽️';
+        modalEmoji.classList.remove('hidden');
+        modalEmoji.classList.add('flex');
+      }
       document.getElementById('modalProductCategory').innerText = product.category.toUpperCase();
       document.getElementById('modalProductName').innerText = product.name;
       document.getElementById('modalProductDesc').innerText = product.description;
@@ -1026,7 +1073,8 @@
         price: unitFinalPrice,
         quantity: modalQuantity,
         notes: notes,
-        image: activeModalProduct.image
+        image: activeModalProduct.image,
+        emoji: activeModalProduct.emoji
       };
 
       cart.push(cartItem);
@@ -1129,7 +1177,7 @@
 
         el.innerHTML = `
           <div class="w-16 h-16 rounded-lg bg-zinc-900 overflow-hidden shrink-0">
-            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover">
+            ${productVisualHtml(item, 'w-full h-full object-cover', 'text-3xl')}
           </div>
           <div class="flex-1 min-w-0">
             <div class="flex justify-between items-start pr-6">
@@ -1226,7 +1274,7 @@
       const finalTotal = subtotal + deliveryCost;
 
       // Montagem da mensagem estruturada para o WhatsApp
-      let msg = `Olá! 👋 Gostaria de fazer um pedido na *Fornalha Vila*.\n\n`;
+      let msg = `Olá! 👋 Gostaria de fazer um pedido na *Fornalha da Vila*.\n\n`;
       msg += `📋 *ITENS DO PEDIDO*\n`;
       msg += itemsMessageList;
       msg += `\nSubtotal: €${subtotal.toFixed(2)}\n`;
@@ -1263,7 +1311,7 @@
 
     // Botões diretos do WhatsApp
     function directHeroWhatsapp() {
-      const msg = encodeURIComponent("Olá! Gostaria de consultar o cardápio e fazer um pedido na Fornalha Vila.");
+      const msg = encodeURIComponent("Olá! Gostaria de consultar o cardápio e fazer um pedido na Fornalha da Vila.");
       window.open(`https://wa.me/${RESTAURANT_CONFIG.whatsappNumber}?text=${msg}`, '_blank');
     }
 
