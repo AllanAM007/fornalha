@@ -332,6 +332,7 @@
 <!-- Imagem do Modal -->
 <div class="relative h-52 w-full shrink-0 bg-zinc-900">
 <img alt="Produto Fornalha da Vila" class="w-full h-full object-cover" id="modalProductImage" src="">
+<div class="hidden w-full h-full items-center justify-center bg-gradient-to-br from-[#2a1214] via-brand-darkCard to-black text-8xl" id="modalProductEmoji" aria-hidden="true"></div>
 <div class="absolute inset-0 bg-gradient-to-t from-[#151519] via-transparent to-transparent"></div>
 <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-brand-red text-white text-xs font-bold uppercase tracking-wider shadow" id="modalProductCategory">PIZZAS</span>
 </div>
@@ -522,8 +523,7 @@
       pizzaQuatroQueijos: 'img/pizza-quatro-queijos.jpg',
       pizzaFrangoCatupiry: 'img/pizza-frango-catupiry.jpg',
       pizzaPortuguesa: 'img/pizza-portuguesa.jpg',
-      burger: 'https://lh3.googleusercontent.com/aida/AEtjO1XxMnTEVyHaL4OZFod0gtKVa3inheR_OS-gUDXonC4s6MyLyN8pOaCCcVIzxauUXZEGFDWF1WkK7Kb0Zh3of1tLRYssvWrD4cvVgVtzAKmBzUSQqcr-cM6sTgUOmp_Vb_mswe8-5lqJzv_WzGV-VhQxo41ebPm0qfYl7Gio_8o9WIxOmIG3yOCb-Da5IFg8Ycp_LPa4Qj5uyQfRQgwerLiEODrUqk4_1STcfb90u3OZWDaqH7XyXH_2SA',
-      drink: 'https://lh3.googleusercontent.com/aida/AEtjO1W1T_fHmIzIHrt0IILDQ6jg0RR76hubHlbQPbKE97CWGZItdTjAj7WmJRFHnT0T2cuZiqeYTyhb6ap06SIKS9ALFZEMoY5fSDouGOHIq-AVAJkcpJxUvTMZrqi49nuob-W1bVxrU5Xisv_PZ1t7fAkv5MrcXluLTQQyMIWK7QWPiMMVyWNli4NZk7us5uhaZA8vHhc88WpGGmKQC72naoiIy25RrBTZ5OfXH6UOjqph2Ps48zY_CRkV6w'
+      burger: 'https://lh3.googleusercontent.com/aida/AEtjO1XxMnTEVyHaL4OZFod0gtKVa3inheR_OS-gUDXonC4s6MyLyN8pOaCCcVIzxauUXZEGFDWF1WkK7Kb0Zh3of1tLRYssvWrD4cvVgVtzAKmBzUSQqcr-cM6sTgUOmp_Vb_mswe8-5lqJzv_WzGV-VhQxo41ebPm0qfYl7Gio_8o9WIxOmIG3yOCb-Da5IFg8Ycp_LPa4Qj5uyQfRQgwerLiEODrUqk4_1STcfb90u3OZWDaqH7XyXH_2SA'
     };
 
     /* ============================================================
@@ -753,35 +753,13 @@
         ]
       },
 
-      // --- BEBIDAS ---
-      {
-        id: 'bebida-coca',
-        category: 'bebidas',
-        name: 'Coca-Cola Original 330ml',
-        description: 'Lata gelada de 330ml para acompanhar sua refeição.',
-        image: IMG.drink,
-        sizes: [
-          { name: '330ml', price: 1.80 }
-        ]
-      },
-      {
-        id: 'bebida-cerveja',
-        category: 'bebidas',
-        name: 'Cerveja Artesanal da Casa',
-        description: 'Cerveja gelada artesanal perfeita com pizzas e burgers.',
-        image: IMG.burger, // TODO: trocar por foto da cerveja
-        sizes: [
-          { name: 'Garrafa 330ml', price: 2.80 }
-        ]
-      },
-
       // --- ACOMPANHAMENTOS ---
       {
         id: 'acomp-fritas-alecrim',
         category: 'acompanhamentos',
         name: 'Batata Rústica com Alecrim',
         description: 'Batatas douradas estaladiças temperadas com sal marinho, alecrim fresco e molho aioli artesanal.',
-        image: IMG.drink, // TODO: trocar por foto da batata
+        emoji: '🍟', // TODO: trocar por foto da batata
         badge: 'Crocante',
         sizes: [
           { name: 'Porção Média', price: 4.50 },
@@ -789,6 +767,59 @@
         ]
       }
     ];
+
+    /* ============================================================
+       BEBIDAS (sem foto: o card mostra o emoji no lugar da imagem)
+       [nome, preço, emoji, descrição]
+       ============================================================ */
+    const DRINKS_DATA = [
+      ['Coca-Cola lata 33 cl', 1.60, '🥤', 'Refrigerante bem gelado.'],
+      ['Coca-Cola Zero lata 33 cl', 1.60, '🥤', 'Refrigerante bem gelado.'],
+      ['Coca-Cola 1 L', 2.50, '🥤', 'Garrafa para partilhar.'],
+      ['Coca-Cola 1,5 L', 3.00, '🥤', 'Garrafa para partilhar.'],
+      ['Sumol Laranja 33 cl', 1.60, '🍊', 'Refrigerante bem gelado.'],
+      ['Sumol Ananás 33 cl', 1.60, '🍍', 'Refrigerante bem gelado.'],
+      ['Guaraná Antarctica 33 cl', 1.60, '🥤', 'Refrigerante bem gelado.'],
+      ['Guaraná 1,5 L', 3.00, '🥤', 'Garrafa para partilhar.'],
+      ['Ice Tea Manga 33 cl', 1.60, '🧃', 'Chá gelado.'],
+      ['Ice Tea Pêssego 33 cl', 1.60, '🧃', 'Chá gelado.'],
+      ['7Up 33 cl', 1.60, '🥤', 'Refrigerante bem gelado.'],
+      ['Pepsi 33 cl', 1.60, '🥤', 'Refrigerante bem gelado.'],
+      ['Pepsi Zero 33 cl', 1.60, '🥤', 'Refrigerante bem gelado.'],
+      ['Frize Laranja', 1.60, '🍊', 'Água com gás e sabor a laranja.'],
+      ['Compal Manga e Laranja', 1.60, '🧃', 'Néctar de fruta.'],
+      ['Água 50 cl', 1.00, '💧', 'Água mineral.'],
+      ['Água 1,5 L', 1.60, '💧', 'Água mineral.'],
+      ['Sagres Mini', 1.20, '🍺', 'Cerveja bem gelada.'],
+      ['Sagres Média', 1.50, '🍺', 'Cerveja bem gelada.'],
+      ['Super Bock Mini', 1.20, '🍺', 'Cerveja bem gelada.'],
+      ['Super Bock Média', 1.50, '🍺', 'Cerveja bem gelada.'],
+      ['Heineken', 1.40, '🍺', 'Cerveja bem gelada.'],
+      ['Jarro de Vinho', 3.00, '🍷', 'Vinho da casa.'],
+      ['Taça de Vinho', 1.50, '🍷', 'Vinho da casa.'],
+      ['Imperial', 1.40, '🍺', 'Cerveja de pressão.'],
+      ['Somersby Média', 1.80, '🍏', 'Sidra bem gelada.'],
+      ['Somersby Mini', 1.50, '🍏', 'Sidra bem gelada.']
+    ];
+
+    DRINKS_DATA.forEach(([name, price, emoji, description], i) => {
+      PRODUCTS_DATA.push({
+        id: `bebida-${i + 1}`,
+        category: 'bebidas',
+        name,
+        description,
+        emoji,
+        sizes: [{ name: 'Unidade', price }]
+      });
+    });
+
+    // Imagem do produto, ou o emoji num fundo escuro quando não há foto
+    function productVisualHtml(product, imgClass, emojiClass) {
+      if (product.image) {
+        return `<img src="${product.image}" alt="${product.name}" loading="lazy" class="${imgClass}">`;
+      }
+      return `<div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#2a1214] via-brand-darkCard to-black"><span class="${emojiClass}" aria-hidden="true">${product.emoji || '🍽️'}</span></div>`;
+    }
 
     /* ============================================================
        ESTADO DA APLICAÇÃO (CARRINHO E MODAL)
@@ -831,8 +862,8 @@
         card.className = `bg-brand-darkCard rounded-2xl border ${isFornalhaSpecial ? 'border-brand-gold/80 shadow-brand-red/20 shadow-xl' : 'border-brand-border/80'} hover:border-brand-gold/50 overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col group`;
 
         card.innerHTML = `
-          <div class="relative h-48 w-full overflow-hidden bg-zinc-900 cursor-pointer" onclick="openProductModal('${product.id}')">
-            <img src="${product.image}" alt="${product.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="relative ${product.image ? 'h-48' : 'h-32'} w-full overflow-hidden bg-zinc-900 cursor-pointer" onclick="openProductModal('${product.id}')">
+            ${productVisualHtml(product, 'w-full h-full object-cover group-hover:scale-105 transition-transform duration-500', 'text-6xl group-hover:scale-110 transition-transform duration-500')}
             ${product.badge ? `<span class="absolute top-3 left-3 px-2.5 py-1 rounded-full ${badgeClasses} text-[10px] font-extrabold uppercase tracking-wider shadow">${product.badge}</span>` : ''}
             ${product.category === 'pizzas' ? `<span class="absolute bottom-3 right-3 px-2 py-0.5 rounded-md bg-black/75 border border-brand-gold/40 text-brand-goldLight text-[10px] font-semibold tracking-wide backdrop-blur-sm">+ Borda Opcional</span>` : ''}
           </div>
@@ -907,7 +938,20 @@
       selectedCrust = 'none';
       modalQuantity = 1;
 
-      document.getElementById('modalProductImage').src = product.image;
+      const modalImg = document.getElementById('modalProductImage');
+      const modalEmoji = document.getElementById('modalProductEmoji');
+      if (product.image) {
+        modalImg.src = product.image;
+        modalImg.classList.remove('hidden');
+        modalEmoji.classList.add('hidden');
+        modalEmoji.classList.remove('flex');
+      } else {
+        modalImg.removeAttribute('src');
+        modalImg.classList.add('hidden');
+        modalEmoji.innerText = product.emoji || '🍽️';
+        modalEmoji.classList.remove('hidden');
+        modalEmoji.classList.add('flex');
+      }
       document.getElementById('modalProductCategory').innerText = product.category.toUpperCase();
       document.getElementById('modalProductName').innerText = product.name;
       document.getElementById('modalProductDesc').innerText = product.description;
@@ -1029,7 +1073,8 @@
         price: unitFinalPrice,
         quantity: modalQuantity,
         notes: notes,
-        image: activeModalProduct.image
+        image: activeModalProduct.image,
+        emoji: activeModalProduct.emoji
       };
 
       cart.push(cartItem);
@@ -1132,7 +1177,7 @@
 
         el.innerHTML = `
           <div class="w-16 h-16 rounded-lg bg-zinc-900 overflow-hidden shrink-0">
-            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover">
+            ${productVisualHtml(item, 'w-full h-full object-cover', 'text-3xl')}
           </div>
           <div class="flex-1 min-w-0">
             <div class="flex justify-between items-start pr-6">
