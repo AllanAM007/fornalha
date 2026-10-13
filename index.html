@@ -208,6 +208,9 @@
 <button class="cat-btn px-5 py-2.5 rounded-xl text-sm font-semibold flex items-center gap-2 transition-all duration-200 hover:text-white border border-brand-border hover:border-brand-gold/40 bg-brand-darkCard text-zinc-300" id="btn-cat-burgers" onclick="filterCategory('burgers')">
 <span>🍔</span> Burgers
         </button>
+<button class="cat-btn px-5 py-2.5 rounded-xl text-sm font-semibold flex items-center gap-2 transition-all duration-200 hover:text-white border border-brand-border hover:border-brand-gold/40 bg-brand-darkCard text-zinc-300" id="btn-cat-acai" onclick="filterCategory('acai')">
+<span>🍇</span> Açaí
+        </button>
 <button class="cat-btn px-5 py-2.5 rounded-xl text-sm font-semibold flex items-center gap-2 transition-all duration-200 hover:text-white border border-brand-border hover:border-brand-gold/40 bg-brand-darkCard text-zinc-300" id="btn-cat-bebidas" onclick="filterCategory('bebidas')">
 <span>🥤</span> Bebidas
         </button>
@@ -369,6 +372,11 @@
 <span class="text-[10px] text-brand-gold">+3,00€</span>
 </button>
 </div>
+</div>
+<!-- MONTE O SEU AÇAÍ (apenas para açaí) -->
+<div class="hidden space-y-4" id="modalAcaiSection">
+<p class="text-xs text-zinc-400">Inclui <strong class="text-zinc-200">1 fruta, 1 calda e 2 complementos</strong>. Cada extra custa <strong class="text-brand-gold">+€1.00</strong>.</p>
+<div id="modalAcaiGroups" class="space-y-4"></div>
 </div>
 <!-- QUANTIDADE -->
 <div class="flex items-center justify-between p-3.5 rounded-xl bg-brand-darkCard border border-brand-border">
@@ -856,8 +864,82 @@
     }
 
     /* ============================================================
+       AÇAÍ NO COPO: o cliente monta o copo; acima do incluído,
+       cada item extra custa €1,00
+       ============================================================ */
+    const ACAI_EXTRA_PRICE = 1.00;
+    const ACAI_GROUPS = [
+      { key: 'frutas', label: 'Frutas', included: 1, options: ['Banana', 'Morango', 'Kiwi', 'Manga'] },
+      { key: 'caldas', label: 'Cobertura / Caldas', included: 1, options: ['Calda de Chocolate', 'Calda de Morango', 'Calda de Frutas Vermelhas', 'Mel'] },
+      { key: 'complementos', label: 'Complementos', included: 2, options: ['Granola', 'Leite em pó', 'Chocolate', 'Oreo', 'Granulado', 'Paçoca', 'Creme de avelã', 'Leite condensado'] }
+    ];
+
+    PRODUCTS_DATA.push({
+      id: 'acai-copo',
+      category: 'acai',
+      name: 'Açaí no Copo',
+      description: 'Açaí cremoso com 1 fruta, 1 calda e 2 complementos à sua escolha. Extras por €1,00 cada.',
+      emoji: '🍇',
+      image: 'img/acai-copo.jpg',
+      badge: 'Novo',
+      sizes: [
+        { name: '250 ml', price: 6.50 },
+        { name: '475 ml', price: 9.50 }
+      ]
+    });
+
+    let acaiSelection = {};
+
+    function resetAcaiSelection() {
+      acaiSelection = {};
+      ACAI_GROUPS.forEach(g => { acaiSelection[g.key] = []; });
+    }
+
+    function acaiExtrasCount() {
+      return ACAI_GROUPS.reduce((n, g) => n + Math.max(0, acaiSelection[g.key].length - g.included), 0);
+    }
+
+    function toggleAcaiOption(groupKey, option) {
+      const list = acaiSelection[groupKey];
+      const idx = list.indexOf(option);
+      if (idx >= 0) list.splice(idx, 1); else list.push(option);
+      renderAcaiGroups();
+      updateModalTotal();
+    }
+
+    function renderAcaiGroups() {
+      const box = document.getElementById('modalAcaiGroups');
+      box.innerHTML = ACAI_GROUPS.map(g => {
+        const chosen = acaiSelection[g.key];
+        const extras = Math.max(0, chosen.length - g.included);
+        const chips = g.options.map(opt => {
+          const on = chosen.includes(opt);
+          return `<button type="button" onclick="toggleAcaiOption('${g.key}', '${opt}')" class="px-3 py-2 rounded-xl border text-xs transition-all ${on ? 'border-brand-gold bg-brand-gold/10 text-white font-bold' : 'border-brand-border bg-brand-darkCard text-zinc-400 hover:text-white font-semibold'}">${on ? '✓ ' : ''}${opt}</button>`;
+        }).join('');
+        return `
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <label class="block text-xs font-bold uppercase tracking-wider text-brand-gold">${g.label}</label>
+              <span class="text-[11px] text-zinc-400">${chosen.length}/${g.included} incluída${g.included > 1 ? 's' : ''}${extras ? ` · <span class="text-brand-gold font-bold">+${extras} extra</span>` : ''}</span>
+            </div>
+            <div class="flex flex-wrap gap-2">${chips}</div>
+          </div>`;
+      }).join('');
+    }
+
+    // Texto das escolhas do açaí para o carrinho e o WhatsApp
+    function acaiSummary() {
+      return ACAI_GROUPS
+        .filter(g => acaiSelection[g.key].length)
+        .map(g => `${g.label}: ${acaiSelection[g.key].join(', ')}`)
+        .join(' | ');
+    }
+
+    /* ============================================================
        ESTADO DA APLICAÇÃO (CARRINHO E MODAL)
        ============================================================ */
+    const CATEGORY_LABELS = { pizzas: 'Pizzas', burgers: 'Burgers', acai: 'Açaí', bebidas: 'Bebidas', acompanhamentos: 'Acompanhamentos' };
+
     let cart = [];
     let currentCategory = 'pizzas';
     let deliveryMethod = 'entrega'; // 'entrega' ou 'retirada'
@@ -978,6 +1060,8 @@
         modalImg.src = product.image;
         modalImg.classList.toggle('object-contain', product.category === 'bebidas');
         modalImg.classList.toggle('object-cover', product.category !== 'bebidas');
+        // Açaí: mostra o topo do copo (frutas) no banner largo do modal
+        modalImg.style.objectPosition = product.category === 'acai' ? 'center 30%' : '';
         modalImg.classList.remove('hidden');
         modalEmoji.classList.add('hidden');
         modalEmoji.classList.remove('flex');
@@ -988,7 +1072,7 @@
         modalEmoji.classList.remove('hidden');
         modalEmoji.classList.add('flex');
       }
-      document.getElementById('modalProductCategory').innerText = product.category.toUpperCase();
+      document.getElementById('modalProductCategory').innerText = (CATEGORY_LABELS[product.category] || product.category).toUpperCase();
       document.getElementById('modalProductName').innerText = product.name;
       document.getElementById('modalProductDesc').innerText = product.description;
       document.getElementById('modalProductNotes').value = '';
@@ -1000,7 +1084,7 @@
       const sizesLabel = document.getElementById('modalSizesLabel');
       sizesOptions.innerHTML = '';
 
-      sizesLabel.innerText = product.category === 'pizzas' ? 'Escolha o Tamanho' : 'Versão Selecionada';
+      sizesLabel.innerText = ['pizzas', 'acai'].includes(product.category) ? 'Escolha o Tamanho' : 'Versão Selecionada';
 
       if (product.sizes.length > 0) {
         sizesContainer.classList.remove('hidden');
@@ -1019,6 +1103,15 @@
       }
 
       // Seção de borda recheada: visível APENAS para pizzas
+      const acaiSection = document.getElementById('modalAcaiSection');
+      resetAcaiSelection();
+      if (product.category === 'acai') {
+        acaiSection.classList.remove('hidden');
+        renderAcaiGroups();
+      } else {
+        acaiSection.classList.add('hidden');
+      }
+
       const crustSection = document.getElementById('modalCrustSection');
       if (product.category === 'pizzas') {
         crustSection.classList.remove('hidden');
@@ -1077,7 +1170,8 @@
       if (!activeModalProduct) return;
       const basePrice = activeModalProduct.sizes[selectedSizeIndex].price;
       const crustExtra = (activeModalProduct.category === 'pizzas' && selectedCrust !== 'none') ? CRUST_OPTIONS[selectedCrust].price : 0;
-      const unitTotal = basePrice + crustExtra;
+      const acaiExtra = activeModalProduct.category === 'acai' ? acaiExtrasCount() * ACAI_EXTRA_PRICE : 0;
+      const unitTotal = basePrice + crustExtra + acaiExtra;
       const total = unitTotal * modalQuantity;
       document.getElementById('modalProductTotalPrice').innerText = `€${total.toFixed(2)}`;
     }
@@ -1093,7 +1187,9 @@
       const sizeObj = activeModalProduct.sizes[selectedSizeIndex];
       const crustInfo = (activeModalProduct.category === 'pizzas') ? CRUST_OPTIONS[selectedCrust] : null;
       const crustPrice = (crustInfo && selectedCrust !== 'none') ? crustInfo.price : 0;
-      const unitFinalPrice = sizeObj.price + crustPrice;
+      const isAcai = activeModalProduct.category === 'acai';
+      const acaiExtraPrice = isAcai ? acaiExtrasCount() * ACAI_EXTRA_PRICE : 0;
+      const unitFinalPrice = sizeObj.price + crustPrice + acaiExtraPrice;
       const notes = document.getElementById('modalProductNotes').value.trim();
 
       const cartItem = {
@@ -1106,6 +1202,8 @@
         crustKey: selectedCrust,
         crustName: (crustInfo && selectedCrust !== 'none') ? crustInfo.name : null,
         crustPrice: crustPrice,
+        acaiText: isAcai ? acaiSummary() : '',
+        acaiExtraPrice: acaiExtraPrice,
         price: unitFinalPrice,
         quantity: modalQuantity,
         notes: notes,
@@ -1210,6 +1308,9 @@
         const crustLabel = item.crustName
           ? `<span class="text-[11px] text-amber-300 font-semibold block mt-0.5"><i class="fa-solid fa-circle-dot text-[9px] text-brand-gold mr-1"></i>${item.crustName} (+€${item.crustPrice.toFixed(2)})</span>`
           : '';
+        const acaiLabel = item.acaiText
+          ? `<span class="text-[11px] text-purple-300 font-semibold block mt-0.5 leading-snug">${item.acaiText}${item.acaiExtraPrice ? ` (+€${item.acaiExtraPrice.toFixed(2)} extras)` : ''}</span>`
+          : '';
 
         el.innerHTML = `
           <div class="w-16 h-16 rounded-lg bg-zinc-900 overflow-hidden shrink-0">
@@ -1221,6 +1322,7 @@
             </div>
             <span class="text-xs text-brand-gold font-medium block">Opção: ${item.sizeName}</span>
             ${crustLabel}
+            ${acaiLabel}
             ${item.notes ? `<p class="text-[11px] text-zinc-400 italic mt-0.5 line-clamp-1">Obs: "${escapeHtml(item.notes)}"</p>` : ''}
 
             <div class="mt-2 flex items-center justify-between">
@@ -1295,15 +1397,16 @@
       let subtotal = 0;
       let itemsMessageList = '';
 
-      const CATEGORY_ICONS = { pizzas: '🍕', burgers: '🍔', bebidas: '🥤', acompanhamentos: '🍟' };
+      const CATEGORY_ICONS = { pizzas: '🍕', burgers: '🍔', acai: '🍇', bebidas: '🥤', acompanhamentos: '🍟' };
 
       cart.forEach(item => {
         const itemTotal = item.price * item.quantity;
         subtotal += itemTotal;
         const crustText = item.crustName ? ` | ${item.crustName} (+€${item.crustPrice.toFixed(2)})` : '';
+        const acaiText = item.acaiText ? `\n   ${item.acaiText}${item.acaiExtraPrice ? ` (+€${item.acaiExtraPrice.toFixed(2)} extras)` : ''}` : '';
         const obsText = item.notes ? `\n   Obs: ${item.notes}` : '';
         const icon = CATEGORY_ICONS[item.category] || '🍽️';
-        itemsMessageList += `• ${item.quantity}x ${icon} ${item.name} — ${item.sizeName}${crustText} — €${itemTotal.toFixed(2)}${obsText}\n`;
+        itemsMessageList += `• ${item.quantity}x ${icon} ${item.name} — ${item.sizeName}${crustText} — €${itemTotal.toFixed(2)}${acaiText}${obsText}\n`;
       });
 
       const deliveryCost = deliveryMethod === 'entrega' ? RESTAURANT_CONFIG.deliveryFee : 0;
