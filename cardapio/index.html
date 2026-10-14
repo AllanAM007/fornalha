@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cardápio | Fornalha da Vila</title>
+<meta name="description" content="Cardápio da Fornalha da Vila: pizzas, burgers, açaí, bebidas e acompanhamentos.">
+<meta property="og:title" content="Cardápio | Fornalha da Vila">
+<meta property="og:description" content="Pizzas, burgers, açaí, bebidas e acompanhamentos. Peça pelo WhatsApp!">
+<meta property="og:image" content="cardapio.jpg">
+<link rel="icon" href="../img/logo-fornalha-sm.jpg">
+<style>
+  :root { --red: #E5252A; --gold: #D4AF37; --gold2: #F3C969; --bg: #0d0d0f; --card: #17171b; --line: #2e2e38; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: #f4f4f6; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  header { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 12px; padding: 10px 16px;
+    background: rgba(14,14,17,.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  header img { width: 40px; height: 40px; border-radius: 10px; border: 1px solid rgba(212,175,55,.5); }
+  header .name { flex: 1; font-weight: 900; letter-spacing: .5px; font-size: 16px; }
+  header .name span { color: var(--red); }
+  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 14px; border-radius: 12px; font-weight: 700; font-size: 14px;
+    text-decoration: none; white-space: nowrap; }
+  .btn-red { background: var(--red); color: #fff; }
+  .btn-green { background: #25D366; color: #0b2e17; }
+  .btn-ghost { background: var(--card); color: #e4e4e7; border: 1px solid var(--line); }
+  main { max-width: 900px; margin: 0 auto; padding: 16px; }
+  .hint { text-align: center; color: #a8a8b2; font-size: 13px; margin-bottom: 12px; }
+  .menu { display: block; width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--line); box-shadow: 0 10px 40px rgba(0,0,0,.6); }
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 18px 0 8px; }
+  footer { text-align: center; color: #71717a; font-size: 12px; padding: 18px 16px 28px; }
+</style>
+</head>
+<body>
+<header>
+  <img src="../img/logo-fornalha-sm.jpg" alt="Logo Fornalha da Vila">
+  <div class="name">FORNALHA DA <span>VILA</span></div>
+  <a class="btn btn-red" href="../#cardapio">Fazer pedido</a>
+</header>
+<main>
+  <p class="hint">Toque na imagem para abrir em tamanho grande e ampliar.</p>
+  <a href="cardapio.jpg" target="_blank" rel="noopener">
+    <img class="menu" src="cardapio.jpg" alt="Cardápio da Fornalha da Vila com pizzas, burgers, açaí, bebidas e acompanhamentos e respetivos preços">
+  </a>
+  <div class="actions">
+    <a class="btn btn-red" href="../#cardapio">🍕 Fazer pedido no site</a>
+    <a class="btn btn-green" href="https://wa.me/351932851736" target="_blank" rel="noopener">WhatsApp +351 932 851 736</a>
+    <a class="btn btn-ghost" href="cardapio-fornalha-da-vila-A3.pdf" download>⬇ Descarregar PDF</a>
+  </div>
+</main>
+<footer>R. da Liberdade 7, 2590-026 Sobral de Monte Agraço · Terça a Sábado: 11:00–15:00 e 18:00–23:00</footer>
+</body>
+</html>
