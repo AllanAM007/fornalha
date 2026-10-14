@@ -530,6 +530,7 @@
       pizzaSiciliana: 'img/pizza-siciliana.jpg',
       pizzaQuatroQueijos: 'img/pizza-quatro-queijos.jpg',
       pizzaFrangoCatupiry: 'img/pizza-frango-catupiry.jpg',
+      pizzaCalabresa: 'img/pizza-calabresa.jpg',
       pizzaPortuguesa: 'img/pizza-portuguesa.jpg'
     };
 
@@ -544,10 +545,10 @@
 
     /* ============================================================
        ESTRUTURA CENTRALIZADA DE PRODUTOS
-       12 Sabores Oficiais de Pizza + 6 Hambúrgueres Oficiais, Bebidas e Acompanhamentos
+       13 Sabores Oficiais de Pizza + 6 Hambúrgueres Oficiais, Bebidas e Acompanhamentos
        ============================================================ */
     const PRODUCTS_DATA = [
-      // --- 12 PIZZAS OFICIAIS ---
+      // --- 13 PIZZAS OFICIAIS ---
       {
         id: 'pizza-1-atum',
         category: 'pizzas',
@@ -688,6 +689,18 @@
         sizes: [
           { name: 'Média', price: 12.50 },
           { name: 'Grande', price: 18.50 }
+        ]
+      },
+      {
+        id: 'pizza-13-calabresa',
+        category: 'pizzas',
+        name: 'Pizza Calabresa',
+        description: 'Queijo mussarela, calabresa e cebola.',
+        image: IMG.pizzaCalabresa,
+        badge: 'Novidade',
+        sizes: [
+          { name: 'Média', price: 11.00 },
+          { name: 'Grande', price: 17.00 }
         ]
       },
 
